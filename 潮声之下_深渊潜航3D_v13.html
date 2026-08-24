@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>潮声之下 · 星髓远征 v13（深渊构筑版）</title>
+<title>潮声之下 · 无尽深渊 v13.1</title>
 <style>
   :root{--bg:#04070c;--ink:#cfe9df;--dim:#5e736c;--acc:#5fe0b0;--acc2:#7fffd4;--blood:#e0506a;--gold:#d9c08a;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -293,12 +293,13 @@
 
 <div id="menu" class="overlay hidden">
   <div class="panel">
-<h1>潮声之下 · 星髓远征</h1>
-<div class="sub">根据罗伯特·里德《星髓》完整故事改编的五章战术潜航</div>
+<h1>潮声之下 · 无尽深渊</h1>
+<div class="sub">根据罗伯特·里德《星髓》世界观改编的无尽深渊生存战</div>
 <div class="premise-card"><b>大船纪元：</b>一艘质量相当于二十颗地球、来自银河之外的远古巨船，被人类船长经营成万族客轮。核心深处却悬着一颗火星大小的铁世界“髓星”。一份署名首领船长的密令召集精英下潜——但这份命令是真的吗？</div>
     <div class="run-setup">
       <section class="setup-group"><h2>潜航模式</h2><div id="modePicker" class="choice-row" aria-label="潜航模式">
-<button type="button" class="choice-card" data-mode="expedition" aria-pressed="true"><strong>星髓远征</strong><em>完整剧情</em><small>从秘密登陆到重封髓星，经历五部主线与关键反转。</small></button>
+<button type="button" class="choice-card" data-mode="endless" aria-pressed="true"><strong>无尽深渊</strong><em>主模式</em><small>无限波次、每波构筑、每五波巨兽；压力与奖励不断升级。</small></button>
+<button type="button" class="choice-card" data-mode="expedition" aria-pressed="false"><strong>星髓远征</strong><em>剧情档案</em><small>从秘密登陆到重封髓星，经历五部主线与关键反转。</small></button>
 <button type="button" class="choice-card" data-mode="stage" aria-pressed="false"><strong>书记官复演</strong><em>单章</em><small>由人工智能书记官重建指定历史战场。</small></button>
         <button type="button" class="choice-card" data-mode="bossRush" aria-pressed="false"><strong>守卫协议</strong><em>高危</em><small>关闭前置任务，连续挑战五个核心守卫。</small></button>
       </div></section>
@@ -311,9 +312,9 @@
     <section class="level-select"><h2>出发海域</h2><div id="levelPicker" class="level-row" aria-label="出发海域">
 <button type="button" class="level-choice" data-level="0" aria-pressed="true">L1 大船</button><button type="button" class="level-choice" data-level="1" aria-pressed="false">L2 髓星</button><button type="button" class="level-choice" data-level="2" aria-pressed="false">L3 夺船</button><button type="button" class="level-choice" data-level="3" aria-pressed="false">L4 荒凉</button><button type="button" class="level-choice" data-level="4" aria-pressed="false">L5 建造者</button>
     </div><small id="levelRule">完整体验五章剧情；抉择会改变能力与最终结局。</small></section>
-<div id="selectionSummary" role="status">已选择：星髓远征 · 浣生 · L1 阿尔法海</div>
+<div id="selectionSummary" role="status">已选择：无尽深渊 · 浣生 · L1 大船生态舱</div>
     <div class="hi">最高纪录：<span id="hiVal">0</span> 分</div>
-    <button class="btn" id="startBtn">开始星髓远征</button>
+    <button class="btn" id="startBtn">开始无尽深渊</button>
     <div class="menu-inline-actions"><button class="btn sec" id="restBtn">休息站与永久升级</button><button class="btn sec" id="archiveBtn">世界与剧情档案</button><button class="btn sec" id="menuSettingsBtn">游戏设置</button></div>
     <details class="how-to"><summary>查看玩法与操作</summary><div class="goal">
       <b>操作</b>：WASD 移动 · 鼠标环顾 · 空格 跳跃 · Shift 加速 · <b>Q 闪避</b> · <b>F 髓瓷护幕</b> · <b>R 神经超频</b> · E 拾取 · 左键攻击 · 1/2/3 切换武器。<br>
@@ -321,7 +322,7 @@
 <b>处决</b>：持续攻击削减韧性，破韧后贴近并按攻击键处决。证据信标可以恢复氧气、生命和瓷骨弹药；每关开始氧气自动补满。
     </div></details>
     <div class="hint">点击画面锁定鼠标（Esc 释放并暂停）· 引擎已本地化，离线可玩 · 若在内嵌预览中操作受限，请在新标签页打开</div>
-    <div class="version-note">v13 · 单局三选一构筑、永久进程、动态潮汐、连杀掉落与续命</div>
+    <div class="version-note">v13.1 · 无尽波次、每波构筑、巨兽里程碑、动态潮汐与永久进程</div>
   </div>
 </div>
 
@@ -1560,6 +1561,7 @@ function playerHit(dmg, chain){
   G.hitCool = 1.0;   // CSD-SOUL1-HARD：受击无敌帧 1.2→1.0s（连续失误更致命）
   /* CSD-H2：受击改扣 HP（原扣氧；数值不变，结算目标改 HP）；HP<=0 → OVER + deathCause="hp"。
      首因锁定：同帧双条件（氧耗尽 + HP 归零）时，先触发者胜，OVER 后不再覆盖死因。 */
+  if(G.modeId==="endless"&&G.endless)dmg*=G.endless.damageMul||1;
   G.hp = Math.max(0, (G.hp === undefined ? HP_MAX : G.hp) - dmg);
   if(G.hp<=0 && G.state !== S.OVER){ G.hp=0; G.deathCause="hp"; setEnding(S.OVER); }
   return true;
@@ -2104,6 +2106,7 @@ function objectiveMet(){
    - 终关（L5 gate）/ 默认单关：达标进门 → setEnding(WIN) */
 function checkWin(px, pz){
   if(G.state!==S.PLAYING) return false;
+  if(G.modeId==="endless")return false;
   const g = gatePos();
   const d = Math.sqrt((px-g.x)**2 + (pz-g.z)**2);
   if(d >= 3) return false;                // 未到门前
@@ -2942,6 +2945,7 @@ const saved = SAVE ? SAVE.loadSave(storage) : null;
 const settings = { sensitivity: 0.45, mute: false, vibrate: true, reduceFlicker: false, aimAssist: true };
 /* v9：可实际改变通关路径与角色数值的运行配置。单独存储，兼容旧版存档。 */
 const RUN_MODES={
+  endless:{name:"无尽深渊",short:"无尽",rule:"无限波次生存；每波结束三选一，每五波出现巨型 Boss，敌人、潮压与奖励同步升级。",scoreMul:1.15,boost:1,bossHpMul:1},
   expedition:{name:"星髓远征",short:"远征",rule:"完整体验原著五部主线；物证与洞察共同解锁原著结局。",scoreMul:1,boost:2,bossHpMul:1},
   stage:{name:"书记官复演",short:"复演",rule:"重演所选历史节点，击败守卫后直接生成校订档案。",scoreMul:1.2,boost:2,bossHpMul:1.08},
   bossRush:{name:"守卫协议",short:"协议",rule:"跳过调查目标，连续突破五个星髓守卫。",scoreMul:1.5,boost:3,bossHpMul:1.22}
@@ -2992,10 +2996,10 @@ function saveMeta(){try{if(storage)storage.setItem(META_KEY,JSON.stringify(meta)
 function grantCurrency(n,reason){n=Math.max(0,Math.floor(n||0));if(!n)return;meta.currency+=n;saveMeta();if(reason)toast("船币 +"+n+" · "+reason);}
 const ACHIEVEMENTS={firstBlood:{name:"第一滴血",desc:"首次击败敌人",reward:10},streak10:{name:"毫不停息",desc:"达成 10 连杀",reward:25},deepDive:{name:"髓星深潜",desc:"抵达第五关",reward:35},reborn:{name:"重生许可",desc:"首次使用续命",reward:20},builder:{name:"建造者之问",desc:"发现任一完整结局",reward:50}};
 function unlockAchievement(id){const a=ACHIEVEMENTS[id];if(!a||meta.achievements[id])return;meta.achievements[id]=true;meta.currency+=a.reward;saveMeta();showTransmission("成就解锁",a.name+" · 船币 +"+a.reward,4200);}
-const RUN_SELECTION_KEY="chaosheng_dive3d_v10_selection";
-let runSelection={modeId:"expedition",roleId:"explorer",level:0};
+const RUN_SELECTION_KEY="chaosheng_dive3d_v131_selection";
+let runSelection={modeId:"endless",roleId:"explorer",level:0};
 try{
-  const raw=storage&&(storage.getItem(RUN_SELECTION_KEY)||storage.getItem("chaosheng_dive3d_v9_selection")),s=raw?JSON.parse(raw):null;
+  const raw=storage&&storage.getItem(RUN_SELECTION_KEY),s=raw?JSON.parse(raw):null;
   if(s&&RUN_MODES[s.modeId]&&DIVER_ROLES[s.roleId]&&Number.isInteger(s.level))runSelection={modeId:s.modeId,roleId:s.roleId,level:Math.max(0,Math.min(4,s.level))};
 }catch(e){}
 function persistRunSelection(){try{if(storage)storage.setItem(RUN_SELECTION_KEY,JSON.stringify(runSelection));}catch(e){}}
@@ -3860,7 +3864,7 @@ function drawMinimap(ts,force){
   const spots=G.sampleSpots||SAMPLE_SPOTS;for(let i=0;i<spots.length;i++){if(G.grabbed&&G.grabbed[i])continue;const p=minimapPoint(spots[i].x,spots[i].z);minimapDiamond(ctx,p.x,p.y,3.2,"#78caff","rgba(220,249,255,.8)");}
   for(const m of G.monsters||[]){if(!m||m.hp<=0)continue;const p=minimapPoint(m.x,m.z),elite=m.type==="elite",spitter=m.type==="spitter";ctx.beginPath();ctx.arc(p.x,p.y,elite?5:3.5,0,Math.PI*2);ctx.fillStyle=elite?"#ffb14f":spitter?"#c875ff":"#ff7187";ctx.fill();if(m.atk&&m.atk.phase==="windup"){ctx.strokeStyle="rgba(255,80,100,"+(.35+.5*pulse)+")";ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,7+pulse*3,0,Math.PI*2);ctx.stroke();}}
   if(G.boss&&G.boss.hp>0){const p=minimapPoint(G.boss.x,G.boss.z),active=baseObjectiveMet();minimapDiamond(ctx,p.x,p.y,7+pulse*2,active?"#ff315d":"#6e3948",active?"#ffd3dc":"#b68b96");ctx.font="bold 9px serif";ctx.textAlign="center";ctx.fillStyle=active?"#ffd3dc":"#ad9199";ctx.fillText(active?"BOSS":"封锁",p.x,p.y-11);}
-  if(pressure&&pressure.safe){const sp=minimapPoint(pressure.safe.x,pressure.safe.z),sr=pressure.safe.r/MINIMAP_WORLD*(minimapEl.width-20);ctx.strokeStyle=pressure.phase==="surge"?"rgba(99,232,207,.9)":"rgba(99,232,207,.55)";ctx.lineWidth=1.4;ctx.setLineDash([4,3]);ctx.beginPath();ctx.arc(sp.x,sp.y,sr,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);for(const f of pressure.fissures||[]){const fp=minimapPoint(f.x,f.z);ctx.fillStyle="#ff315d";ctx.beginPath();ctx.moveTo(fp.x,fp.y-4);ctx.lineTo(fp.x+4,fp.y+4);ctx.lineTo(fp.x-4,fp.y+4);ctx.closePath();ctx.fill();}}
+  if(pressure&&pressure.safe){const sp=minimapPoint(pressure.safe.x,pressure.safe.z),sr=pressure.safe.r/(MAP_LIMIT*2)*(minimapEl.width-26);ctx.strokeStyle=pressure.phase==="surge"?"rgba(99,232,207,.9)":"rgba(99,232,207,.55)";ctx.lineWidth=1.4;ctx.setLineDash([4,3]);ctx.beginPath();ctx.arc(sp.x,sp.y,sr,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);for(const f of pressure.fissures||[]){const fp=minimapPoint(f.x,f.z);ctx.fillStyle="#ff315d";ctx.beginPath();ctx.moveTo(fp.x,fp.y-4);ctx.lineTo(fp.x+4,fp.y+4);ctx.lineTo(fp.x-4,fp.y+4);ctx.closePath();ctx.fill();}}
   const gp=gatePos(),g=minimapPoint(gp.x,gp.z),open=objectiveMet();ctx.lineWidth=2.4;ctx.strokeStyle=open?"#7fffd4":"#e0506a";ctx.beginPath();ctx.arc(g.x,g.y,7+pulse*1.8,0,Math.PI*2);ctx.stroke();ctx.lineWidth=1;ctx.beginPath();ctx.arc(g.x,g.y,3.2,0,Math.PI*2);ctx.stroke();
   const pp=minimapPoint(player.x,player.z);ctx.save();ctx.translate(pp.x,pp.y);ctx.rotate(-player.yaw);ctx.shadowColor="#7fffd4";ctx.shadowBlur=7;ctx.fillStyle="#e7fff8";ctx.strokeStyle="#174f4b";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,-9);ctx.lineTo(6,7);ctx.lineTo(0,4);ctx.lineTo(-6,7);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
   ctx.restore();
@@ -3888,7 +3892,7 @@ function renderRunBuildStrip(){const el=document.getElementById("runBuildStrip")
 function randomBuildOptions(){const pool=BUILD_POOL.slice(),out=[];while(out.length<3&&pool.length){const i=Math.floor(Math.random()*pool.length);out.push(pool.splice(i,1)[0]);}return out;}
 function renderBuildChoices(){const box=document.getElementById("buildChoices");box.innerHTML="";for(const u of randomBuildOptions()){const b=document.createElement("button");b.type="button";b.className="build-option";b.innerHTML="<b></b><em></em><small></small>";b.querySelector("b").textContent=u.name;b.querySelector("em").textContent=u.tag+" · 当前 "+(runBuild.levels[u.id]||0)+" 层";b.querySelector("small").textContent=u.desc;b.addEventListener("click",()=>chooseBuildUpgrade(u));box.appendChild(b);}const rr=document.getElementById("rerollBuildBtn");rr.style.display=meta.unlocks.reroll?"block":"none";rr.disabled=runBuild.rerolls<=0;rr.textContent="重新扫描（本局剩余 "+runBuild.rerolls+"）";}
 function showBuildChoice(source){if(!G||runBuild.pending||G.state!==S.PLAYING)return;runBuild.pending=true;G.state=S.PAUSED;input.setEnabled(false);try{if(document.pointerLockElement)document.exitPointerLock();}catch(e){}document.getElementById("buildSub").textContent=(source||"击杀经验")+"已触发适应性重构 · 所有升级仅在本次远征生效";renderBuildChoices();document.getElementById("buildOverlay").classList.remove("hidden");}
-function chooseBuildUpgrade(u){u.apply();runBuild.picks++;runBuild.levels[u.id]=(runBuild.levels[u.id]||0)+1;runBuild.pending=false;document.getElementById("buildOverlay").classList.add("hidden");applyRunBuildToG(false);renderRunBuildStrip();showTransmission("构筑完成",u.name+" · "+u.desc,3200);G.state=S.PLAYING;input.setEnabled(true);input.reset();input.requestLock();}
+function chooseBuildUpgrade(u){u.apply();runBuild.picks++;runBuild.levels[u.id]=(runBuild.levels[u.id]||0)+1;runBuild.pending=false;document.getElementById("buildOverlay").classList.add("hidden");applyRunBuildToG(false);renderRunBuildStrip();showTransmission("构筑完成",u.name+" · "+u.desc,3200);G.state=S.PLAYING;if(G.modeId==="endless"&&G.endless?.pendingWave)advanceEndlessWave();input.setEnabled(true);input.reset();input.requestLock();}
 document.getElementById("rerollBuildBtn").addEventListener("click",()=>{if(runBuild.rerolls<=0)return;runBuild.rerolls--;renderBuildChoices();});
 
 function applyRunProfile(g){
@@ -3910,8 +3914,8 @@ function createConfiguredLevel(idx,carry,resetModeBoost){
 let levelIntroTimer=0;
 function showLevelIntro(lv){
   const el=document.getElementById("levelIntro"),mode=selectedMode(),role=selectedRole();
-  document.getElementById("levelIntroTitle").textContent="L"+lv.id+" · "+lv.name;
-document.getElementById("levelIntroSub").textContent="本关氧气与生命已补满 "+Math.round(G.oxygen)+"/"+G.maxOxygen+" · "+mode.name+" · "+role.name;
+  document.getElementById("levelIntroTitle").textContent=G.modeId==="endless"?"无尽深渊 · 第 1 波":("L"+lv.id+" · "+lv.name);
+document.getElementById("levelIntroSub").textContent=(G.modeId==="endless"?"清场即可构筑 · 每五波巨兽里程碑":"本关氧气与生命已补满 "+Math.round(G.oxygen)+"/"+G.maxOxygen)+" · "+mode.name+" · "+role.name;
   el.classList.add("show");clearTimeout(levelIntroTimer);levelIntroTimer=setTimeout(()=>el.classList.remove("show"),2300);
 }
 function updateRunBadge(){const m=selectedMode(),r=selectedRole();document.getElementById("runBadge").textContent=m.short+" · "+(r.shortName||r.name);}
@@ -4081,7 +4085,7 @@ keepRes(lootCoreGeo,lootRingGeo);
 const LOOT_COLORS={hp:0xff5573,oxy:0x63e8cf,ammo:0x5ca8ff,relic:0xffd66b};
 let lootDrops=[];
 function spawnLoot(x,z,force,rareForce){
-  const rareChance=.035+(meta.upgrades.salvage||0)*.018+(meta.unlocks.scanner?.06:0)+(runBuild.rare||0);
+  const rareChance=.035+(meta.upgrades.salvage||0)*.018+(meta.unlocks.scanner?.06:0)+(runBuild.rare||0)+(G.modeId==="endless"&&G.endless?Math.min(.16,G.endless.wave*.004):0);
   if(!force&&!rareForce&&Math.random()>.62)return;
   const kind=(rareForce||Math.random()<rareChance)?"relic":G.hp/(G.maxHp||HP_MAX)<.55?"hp":G.oxygen/(G.maxOxygen||100)<.42?"oxy":G.ammo<3?"ammo":(["hp","oxy","ammo"][Math.floor(Math.random()*3)]);
   const color=LOOT_COLORS[kind],g=new THREE.Group();
@@ -4108,7 +4112,7 @@ function clearLoot(){disposeRoots(lootDrops.map(d=>d.mesh));lootDrops=[];}
 
 /* v13 战斗奖励循环：击杀回复、独立连杀窗口、里程碑奖励与构筑经验。 */
 function registerRunKill(x,z,isBoss){
-  runBuild.kills++;runBuild.streak++;runBuild.streakTimer=runBuild.comboWindow;meta.totalKills++;meta.bestStreak=Math.max(meta.bestStreak,runBuild.streak);G.hp=Math.min(G.maxHp,G.hp+1.5+runBuild.killHeal+(isBoss?8:0));G.oxygen=Math.min(G.maxOxygen,G.oxygen+1+runBuild.killOxy+(isBoss?8:0));G.score+=Math.round((runBuild.streak>1?runBuild.streak*3:0)*runBuild.comboScore);grantCurrency(isBoss?8:1,isBoss?"巨兽赏金":"击杀回收");unlockAchievement("firstBlood");
+  runBuild.kills++;runBuild.streak++;runBuild.streakTimer=runBuild.comboWindow;if(G.modeId==="endless"&&G.endless){G.endless.totalKills++;G.score+=Math.round((10+G.endless.wave*2)*(1+G.endless.wave*.08));}meta.totalKills++;meta.bestStreak=Math.max(meta.bestStreak,runBuild.streak);G.hp=Math.min(G.maxHp,G.hp+1.5+runBuild.killHeal+(isBoss?8:0));G.oxygen=Math.min(G.maxOxygen,G.oxygen+1+runBuild.killOxy+(isBoss?8:0));G.score+=Math.round((runBuild.streak>1?runBuild.streak*3:0)*runBuild.comboScore);grantCurrency(isBoss?8:1,isBoss?"巨兽赏金":"击杀回收");unlockAchievement("firstBlood");
   if(runBuild.streak===3){G.oxygen=Math.min(G.maxOxygen,G.oxygen+8);toast("3 连杀 · 氧气回流 +8");}
   if(runBuild.streak===5){G.ammo=Math.min(AMMO_MAX,G.ammo+2);toast("5 连杀 · 稀有弹药 +2");}
   if(runBuild.streak===10){unlockAchievement("streak10");spawnLoot(x,z,true,true);}
@@ -4123,12 +4127,32 @@ let pressure={time:0,damageTick:0,safe:{x:0,z:0,r:15},fissures:[],meshes:[],phas
 function clearPressureEnvironment(){disposeRoots(pressure.meshes||[]);pressure.meshes=[];}
 function rebuildPressureEnvironment(){clearPressureEnvironment();const lv=(G&&G.level)||1;pressure={time:0,damageTick:0,safe:{x:Math.sin(lv*1.7)*15,z:Math.cos(lv*1.3)*15,r:15},fissures:[],meshes:[],phase:"calm"};const safeMat=new THREE.MeshBasicMaterial({color:0x63e8cf,transparent:true,opacity:.22,side:THREE.DoubleSide,depthWrite:false,fog:false}),safe=new THREE.Mesh(new THREE.RingGeometry(14.5,15,48),safeMat);safe.rotation.x=-Math.PI/2;scene.add(safe);pressure.safeMesh=safe;pressure.meshes.push(safe);for(let i=0;i<3;i++){const a=lv*.9+i*Math.PI*2/3,r=25+(i%2)*11,x=Math.cos(a)*r,z=Math.sin(a)*r,mat=new THREE.MeshBasicMaterial({color:0xff315d,transparent:true,opacity:.34,side:THREE.DoubleSide,depthWrite:false,fog:false}),ring=new THREE.Mesh(new THREE.RingGeometry(2.4,4.5,8),mat);ring.rotation.x=-Math.PI/2;ring.position.set(x,terrainHeight(x,z)+.12,z);scene.add(ring);pressure.fissures.push({x,z,r:4.5,mesh:ring,phase:i*2.1});pressure.meshes.push(ring);}}
 function tickPressure(dt){
-  pressure.time+=dt;const c=pressure.time%72;pressure.phase=c<24?"calm":c<42?"rising":c<62?"surge":"ebb";pressure.safe.x=Math.sin(pressure.time*.045+(G.level||1))*19;pressure.safe.z=Math.cos(pressure.time*.038+(G.level||1)*.7)*19;const s=pressure.safeMesh;if(s){s.position.set(pressure.safe.x,terrainHeight(pressure.safe.x,pressure.safe.z)+.14,pressure.safe.z);s.rotation.z+=dt*.08;s.material.opacity=pressure.phase==="surge"?.38:.2;}
+  pressure.time+=dt;const cycle=G.modeId==="endless"&&G.endless?Math.max(44,72-G.endless.wave*.7):72,c=pressure.time%cycle,p1=cycle*.34,p2=cycle*.59,p3=cycle*.86;pressure.phase=c<p1?"calm":c<p2?"rising":c<p3?"surge":"ebb";pressure.safe.x=Math.sin(pressure.time*.045+(G.level||1))*19;pressure.safe.z=Math.cos(pressure.time*.038+(G.level||1)*.7)*19;pressure.safe.r=G.modeId==="endless"&&G.endless?Math.max(9,15-G.endless.wave*.12):15;const s=pressure.safeMesh;if(s){s.position.set(pressure.safe.x,terrainHeight(pressure.safe.x,pressure.safe.z)+.14,pressure.safe.z);s.scale.setScalar(pressure.safe.r/15);s.rotation.z+=dt*.08;s.material.opacity=pressure.phase==="surge"?.38:.2;}
   for(const f of pressure.fissures){f.mesh.material.opacity=.22+.18*Math.abs(Math.sin(G.time*3+f.phase));f.mesh.scale.setScalar(pressure.phase==="surge"?1.2:1);}
   const safeDist=Math.hypot(player.x-pressure.safe.x,player.z-pressure.safe.z),inside=safeDist<pressure.safe.r,inFissure=pressure.fissures.some(f=>Math.hypot(player.x-f.x,player.z-f.z)<f.r),anchored=runBuild.tempKind==="anchor"&&runBuild.tempTime>0;pressure.damageTick-=dt;if(pressure.damageTick<=0){pressure.damageTick=1;if(!anchored&&inFissure){G.hp=Math.max(0,G.hp-(pressure.phase==="surge"?7:4));G.oxygen=Math.max(0,G.oxygen-6);hurtFlash=1;toast("高危裂隙 · 结构与氧气流失");}else if(!anchored&&!inside&&pressure.phase!=="calm"){G.oxygen=Math.max(0,G.oxygen-(pressure.phase==="surge"?4:1.5));if(pressure.phase==="surge")G.hp=Math.max(0,G.hp-2);}}
-  const hud=document.getElementById("pressureHud"),left=Math.ceil(pressure.phase==="calm"?24-c:pressure.phase==="rising"?42-c:pressure.phase==="surge"?62-c:72-c),names={calm:"潮汐稳定",rising:"压力上升",surge:"深渊潮涌",ebb:"潮压回落"};hud.classList.toggle("surge",pressure.phase==="surge");hud.innerHTML="<b>"+names[pressure.phase]+"</b> · "+(inside?"安全区内":"安全区外")+" · "+left+"秒"+(anchored?" · 锚定免疫":"");
+  const hud=document.getElementById("pressureHud"),left=Math.ceil(pressure.phase==="calm"?p1-c:pressure.phase==="rising"?p2-c:pressure.phase==="surge"?p3-c:cycle-c),names={calm:"潮汐稳定",rising:"压力上升",surge:"深渊潮涌",ebb:"潮压回落"};hud.classList.toggle("surge",pressure.phase==="surge");hud.innerHTML=(G.modeId==="endless"&&G.endless?("<b>第 "+G.endless.wave+" 波</b> · "):"")+"<b>"+names[pressure.phase]+"</b> · "+(inside?"安全区内":"安全区外")+" · "+left+"秒"+(anchored?" · 锚定免疫":"");
   if(G.hp<=0&&G.state!==S.OVER){G.hp=0;G.deathCause="hp";setEnding(S.OVER);}else if(G.oxygen<=0&&G.state!==S.OVER){G.oxygen=0;G.deathCause="oxygen";setEnding(S.OVER);}
 }
+
+/* v13.1 无尽深渊：清场、构筑、升级波次；每五波用本章巨兽制造奖励峰值。 */
+const ENDLESS_TYPES=["gray","dart","spitter","elite"],ENDLESS_BOSSES=["reefCrab","inkWhale","crystalHand","spineEel","handX"];
+function endlessMonster(type,x,z,wave){const t=MONSTER_TYPES[type]||MONSTER_TYPES.gray,hp=Math.max(1,Math.ceil(t.hp*(1+(wave-1)*.13+(type==="elite"?.3:0)))),m={type,x,z,hp,maxHp:hp,cd:0,phase:Math.random()*6.28,score:Math.ceil((t.score||20)*(1+wave*.06)),base:{x,z}};if(type==="dart")m.lunge={phase:"cruise",t:0,cd:0,dx:0,dz:0};if(type==="spitter")m.spit={windup:0,cd:0};if(t.bossBar)m.bossBar=true;if(soulOn){const moves=SOUL_MOVES[type],poise=SOUL_POISE[type];if(moves&&moves.length)m.moves=moves;if(poise)m.poise={max:poise.max,cur:0,regen:poise.regen,regenDelay:poise.regenDelay,lastHit:0};}return m;}
+function endlessBoss(type,wave){const bt=BOSS_TYPES[type]||BOSS_TYPES.handX,gp=gatePos(),hp=Math.ceil(bt.hp*(1+(wave-1)*.1)),b=Object.assign({},bt,{type,x:gp.x,z:gp.z,cd:0,hp,maxHp:hp});if(soulOn){const moves=SOUL_MOVES[type]||SOUL_MOVES.hand,poise=SOUL_POISE[type]||SOUL_POISE.hand;if(moves&&moves.length)b.moves=moves;if(poise)b.poise={max:poise.max,cur:0,regen:poise.regen,regenDelay:poise.regenDelay,lastHit:0};}return b;}
+function prepareEndlessWave(wave,rebuild){
+  const count=Math.min(20,3+Math.ceil(wave*.72)),available=ENDLESS_TYPES.slice(0,Math.min(ENDLESS_TYPES.length,1+Math.ceil(wave/2))),monsters=[];
+  for(let i=0;i<count;i++){const type=available[(i*3+wave)%available.length],a=i*2.399+wave*.73,r=15+(i%4)*7,x=Math.max(-54,Math.min(54,Math.cos(a)*r)),z=Math.max(-54,Math.min(54,Math.sin(a)*r));monsters.push(endlessMonster(type,x,z,wave));}
+  G.monsters=monsters;G.boss=wave%5===0?endlessBoss(ENDLESS_BOSSES[(Math.floor(wave/5)-1)%ENDLESS_BOSSES.length],wave):null;G.objective={kind:"kill",n:count};G.kills=0;G.winOpen=false;G.spitPulses=[];G.enemyHazards=[];
+  G.endless=Object.assign(G.endless||{totalWaves:0,totalKills:0},{wave,cleared:false,pendingWave:0,damageMul:1+(wave-1)*.065,hpMul:1+(wave-1)*.13,bossWave:wave%5===0});
+  setMonsterBoost(Math.min(3,1+Math.floor((wave-1)/4)));
+  if(rebuild){disposeRoots(pulses.map(p=>p.mesh).filter(Boolean));pulses=[];clearTelegraphRings();buildMonsters(G.monsters);rebuildBossMesh(G.boss?G.boss.type:"handX");bossMesh.visible=false;bossRing.visible=false;gateGroup.visible=false;G.hp=Math.min(G.maxHp,G.hp+Math.ceil(G.maxHp*.18));G.oxygen=Math.min(G.maxOxygen,G.oxygen+Math.ceil(G.maxOxygen*.22));G.ammo=Math.min(AMMO_MAX,G.ammo+2);pressure.damageTick=1;buildMinimapLayer();}
+}
+function tickEndless(){
+  if(!G||G.modeId!=="endless"||!G.endless||G.endless.cleared)return;
+  const minionsDown=(G.monsters||[]).every(m=>m.hp<=0),bossDown=!G.boss||G.boss.hp<=0;if(!minionsDown||!bossDown)return;
+  const en=G.endless,wave=en.wave;en.cleared=true;en.totalWaves=Math.max(en.totalWaves,wave);en.pendingWave=wave+1;const bonus=Math.round(90+wave*28+(en.bossWave?wave*35:0));G.score+=bonus;grantCurrency(2+Math.floor(wave/3)+(en.bossWave?8:0),en.bossWave?"巨兽波次完成":"波次完成");G.hp=Math.min(G.maxHp,G.hp+Math.ceil(G.maxHp*.08));G.oxygen=Math.min(G.maxOxygen,G.oxygen+Math.ceil(G.maxOxygen*.12));
+  showTransmission(en.bossWave?"里程碑突破":"无尽协议","第 "+wave+" 波完成 · 结算 +"+bonus+" 分 · 下一波威胁 "+(1+wave*.065).toFixed(2)+" 倍",3600);if(!runBuild.pending&&G.state===S.PLAYING)showBuildChoice("第 "+wave+" 波奖励");
+}
+function advanceEndlessWave(){if(!G||G.modeId!=="endless"||!G.endless?.pendingWave)return false;const wave=G.endless.pendingWave;G.endless.pendingWave=0;prepareEndlessWave(wave,true);G.state=S.PLAYING;renderRunBuildStrip();toast("第 "+wave+" 波来袭"+(G.endless.bossWave?" · 巨兽里程碑！":""));sound("start");return true;}
 
 let hitMarkerTimer=0;
 function showHitMarker(kill){
@@ -4596,7 +4620,8 @@ function updateObjectiveUI(){
   let text = "探索深渊";
   let complete = false;
   const baseDone=baseObjectiveMet(),bossAlive=!!(G.boss&&G.boss.hp>0);
-  if(baseDone&&bossAlive){text="解除核心守卫协议 · "+(BOSS_NAMES[G.boss.type]||"核心守卫");}
+  if(G.modeId==="endless"&&G.endless){const alive=(G.monsters||[]).filter(m=>m.hp>0).length;text="第 "+G.endless.wave+" 波 · "+(baseDone&&bossAlive?("巨兽决战 "+(BOSS_NAMES[G.boss.type]||"核心守卫")):("剩余敌人 "+alive))+" · 威胁 ×"+G.endless.damageMul.toFixed(2);complete=!!G.endless.cleared;}
+  else if(baseDone&&bossAlive){text="解除核心守卫协议 · "+(BOSS_NAMES[G.boss.type]||"核心守卫");}
   else if(objectiveMet()){text="守卫协议已解除 · 进入下行舱门";complete=true;}
   else if(obj.kind === "collect"){
     complete = G.samples >= (obj.n||G.sampleTarget||TARGET_SAMPLES);
@@ -4640,6 +4665,7 @@ function startGame(retryCurrent){
   if(!retryCurrent){resetStoryRun();resetRunBuild();}
   const idx=retryCurrent&&G&&G.level?G.level-1:runSelection.level;
   G = createConfiguredLevel(idx,{score:0,ammo:AMMO_START,runTime:0},!retryCurrent);
+  if(G.modeId==="endless")prepareEndlessWave(1,false);
   saveGame();   // S5：新局进度快照 + 设置持久化
   rebuildScene();
   rebuildPressureEnvironment();
@@ -4658,7 +4684,8 @@ function startGame(retryCurrent){
   input.reset();
   dashQueued=false;shieldQueued=false;overdriveQueued=false;
   sound("start");
-  if(retryCurrent){showTransmission("零号灯塔","潜航记录从中断点重新挂载。已读剧情不会重复覆盖你的记忆。",3900);resumeAfterStory();}
+  if(G.modeId==="endless"){showTransmission("无尽协议","清除全部敌人即可获得三选一构筑；每五波巨型守卫降临。没有终点，只有更高纪录。",4800);resumeAfterStory();}
+  else if(retryCurrent){showTransmission("零号灯塔","潜航记录从中断点重新挂载。已读剧情不会重复覆盖你的记忆。",3900);resumeAfterStory();}
   else showChapterOpening(G.level,true,resumeAfterStory);
 }
 function fmtTime(t){
@@ -4855,9 +4882,10 @@ function loop(ts){
       else if(d.userData.kind==="landmark")for(let i=0;i<d.userData.animated.length;i++){const a=d.userData.animated[i],pulse=1+.018*Math.sin(G.time*.8+d.userData.phase+i*.6);a.rotation.z=a.userData.baseRotZ+Math.sin(G.time*.42+i)*.018;a.scale.copy(a.userData.baseScale).multiplyScalar(pulse);}
     }
     tickLoot(dt);
+    tickEndless();
     // CSD-M2：目标同步（kill/elite/survive 达标后开启裂口；collect/gate 由 collectSample 置位 winOpen）
     if(!G.winOpen && objectiveMet()) G.winOpen = true;
-    checkStoryTriggers();
+    if(G.modeId!=="endless")checkStoryTriggers();
     if(checkWin(player.x, player.z)){
       const completedLevel=G.level||1,carry={score:G.score,ammo:G.ammo,runTime:G.runTime||0},nextIdx=G.nextLevel?(G.nextLevel-1):null;
       chapterExitNarrative(completedLevel,carry,nextIdx);
@@ -4979,7 +5007,7 @@ function loop(ts){
     }
     // 裂口动画 + 光柱
     /* v9：巨兽守在裂口坐标上；交战期间隐藏实体门环，避免穿过 Boss 躯干，击败后再显现。 */
-    gateGroup.visible=!(G.boss&&G.boss.hp>0&&baseObjectiveMet());
+    gateGroup.visible=G.modeId!=="endless"&&!(G.boss&&G.boss.hp>0&&baseObjectiveMet());
     gateGroup.rotation.y += dt*0.4;
     gateGroup.children[0].material.color.setHex(G.winOpen ? 0x7fffd4 : 0xe0506a);
     gateGroup.children[1].material.color.setHex(0x7fffd4);
@@ -5241,7 +5269,7 @@ globalThis.__D3D = {
     loot:lootDrops.length, dashCool:G?(G.dashCool||0):0, shield:G?(G.shield||0):0, overdrive:G?(G.overdrive||0):0,
     moveMul:G?(G.moveMul||1):1,damageMul:G?(G.damageMul||1):1,weaponCoolMul:G?(G.weaponCoolMul||1):1,scoreMul:G?(G.scoreMul||1):1,
     enemyHazards:G&&G.enemyHazards?G.enemyHazards.length:0, slow:G?(G.slow||0):0, bleed:G?(G.bleed||0):0,
-    boss:G&&G.boss?{type:G.boss.type,hp:G.boss.hp,maxHp:G.boss.maxHp}:null,pos:{x:player.x,z:player.z},hi,
+    boss:G&&G.boss?{type:G.boss.type,hp:G.boss.hp,maxHp:G.boss.maxHp}:null,endless:G&&G.endless?{wave:G.endless.wave,cleared:G.endless.cleared,damageMul:G.endless.damageMul,bossWave:G.endless.bossWave,totalWaves:G.endless.totalWaves}:null,pos:{x:player.x,z:player.z},hi,
     story:{order:storyRun.order,echo:storyRun.echo,choices:Object.assign({},storyRun.choices),ending:storyRun.ending,modal:storyModalActive,page:storyPageIndex,options:(storyPages[storyPageIndex]?.choices||[]).map(c=>c.value)} }),
   setPos: (x,z)=>{ player.x=x; player.z=z; },
   /* CSD-H2：怪物强化运行时降档入口（1|2|3，写 G.boost；无需重新构建） */
@@ -5275,7 +5303,9 @@ globalThis.__D3D = {
   qaShowBoss:qaEnabled?()=>{if(G&&G.boss&&bossMesh){clearTelegraphRings();bossRing.visible=false;gateGroup.visible=false;gateBeam.visible=false;G.enemyHazards=[];G.boss.phaseLock=999;G.boss.atk=null;G.boss.feint=null;G.boss.warn=false;bossMesh.visible=true;const d=bossMesh.userData||{};bossMesh.scale.setScalar(d.baseScale||1);bossMesh.position.set(G.boss.x,terrainHeight(G.boss.x,G.boss.z)+(d.hover||2.4),G.boss.z);document.getElementById("levelIntro").classList.remove("show");}return globalThis.__D3D.get();}:undefined,
   qaCompleteLevel:qaEnabled?()=>{if(G){G.samples=sampleTarget();G.kills=999;if(G.objective&&G.objective.t)G.time=Math.max(G.time,G.objective.t);for(const m of G.monsters||[])m.hp=0;if(G.boss)G.boss.hp=0;G.winOpen=true;const p=gatePos();player.x=p.x;player.z=p.z;player.y=terrainHeight(p.x,p.z)+1.7;G.state=S.PLAYING;}return globalThis.__D3D.get();}:undefined,
   qaSetResources:qaEnabled?(hp,oxygen)=>{if(G){G.hp=Math.max(0,Math.min(G.maxHp,Number(hp)));G.oxygen=Math.max(0,Math.min(G.maxOxygen,Number(oxygen)));}return globalThis.__D3D.get();}:undefined,
-  qaLoadLevel:qaEnabled?(i)=>{loadLevel(Math.max(0,Math.min(4,i|0)),{score:G?G.score:0,ammo:G?G.ammo:4,runTime:G?G.runTime:0});return globalThis.__D3D.get();}:undefined
+  qaLoadLevel:qaEnabled?(i)=>{loadLevel(Math.max(0,Math.min(4,i|0)),{score:G?G.score:0,ammo:G?G.ammo:4,runTime:G?G.runTime:0});return globalThis.__D3D.get();}:undefined,
+  qaEndlessClear:qaEnabled?()=>{if(G&&G.modeId==="endless"){for(const m of G.monsters||[])m.hp=0;if(G.boss)G.boss.hp=0;G.kills=G.objective?.n||0;G.state=S.PLAYING;tickEndless();}return {state:globalThis.__D3D.get(),wave:G?.endless||null,build:runBuild.pending};}:undefined,
+  qaEndlessWave:qaEnabled?(wave)=>{if(G&&G.modeId==="endless")prepareEndlessWave(Math.max(1,wave|0),true);return {state:globalThis.__D3D.get(),wave:G?.endless||null};}:undefined
 };
 
 /* HOTFIX-MENU：引擎就绪后显示主菜单（v0 缺失此步，加载页隐藏后菜单也未显示，导致无法开始游戏） */
