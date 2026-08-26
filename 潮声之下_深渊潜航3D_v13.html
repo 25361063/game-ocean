@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>潮声之下 · 第一部二十关 v16</title>
+<title>潮声之下 · 第一部二十关 v17</title>
 <style>
   :root{--bg:#04070c;--ink:#cfe9df;--dim:#5e736c;--acc:#5fe0b0;--acc2:#7fffd4;--blood:#e0506a;--gold:#d9c08a;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -204,6 +204,8 @@
   #menu .sub{text-align:left;margin:-7px 0 11px;color:#78928d;letter-spacing:.05em;}#menu .premise-card{margin:0 0 14px;padding:11px 14px;border-left-width:3px;border-color:rgba(217,192,138,.72);background:linear-gradient(90deg,rgba(217,192,138,.075),transparent);color:#b8cbc5;}
   #menu .run-setup{gap:12px;margin:0 0 12px;}#menu .setup-group,#menu .level-select{border-color:rgba(82,132,139,.25);background:linear-gradient(145deg,rgba(5,16,24,.78),rgba(5,11,19,.72));box-shadow:inset 0 1px rgba(255,255,255,.025);}#menu .setup-group h2,#menu .level-select h2{display:flex;align-items:center;gap:8px;color:#8cf4d4;font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;font-size:10px;}#menu .setup-group h2::before,#menu .level-select h2::before{content:"";width:17px;height:1px;background:var(--acc);box-shadow:0 0 6px rgba(95,224,176,.6);}
   #menu .choice-card{min-height:80px;border-color:rgba(72,113,123,.4);background:linear-gradient(145deg,rgba(9,24,33,.9),rgba(5,12,20,.9));overflow:hidden;}#menu .choice-card::before{content:"";position:absolute;inset:auto 0 0;height:2px;background:var(--role,var(--acc));transform:scaleX(0);transform-origin:left;transition:transform .18s;}#menu .choice-card:hover::before,#menu .choice-card[aria-pressed="true"]::before{transform:scaleX(1);}#menu .choice-card[aria-pressed="true"]{border-color:var(--role,var(--acc2));background:linear-gradient(145deg,rgba(18,55,53,.9),rgba(7,23,29,.94));box-shadow:0 7px 22px rgba(0,0,0,.22),inset 0 0 22px rgba(95,224,176,.055);}
+  #menu .run-setup{grid-template-columns:1.18fr .82fr}#modePicker{grid-template-columns:1.25fr 1fr 1fr;grid-auto-rows:minmax(66px,auto)}#modePicker .mode-card{display:grid;grid-template-columns:38px 1fr;column-gap:9px;align-content:center;min-height:66px;padding:9px 10px}#modePicker .mode-card[data-mode="campaign"]{grid-row:span 2;align-content:start;padding-top:14px;background:radial-gradient(circle at 12% 12%,rgba(95,224,176,.14),transparent 40%),linear-gradient(145deg,rgba(11,37,43,.94),rgba(5,14,23,.94))}#modePicker .mode-icon{grid-row:1/4;display:flex;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid rgba(127,255,212,.25);border-radius:10px;background:rgba(95,224,176,.06);color:var(--acc2);font:19px ui-monospace,monospace;box-shadow:inset 0 0 14px rgba(95,224,176,.04)}#modePicker strong{margin:0;font-size:12px}#modePicker em{font-size:8px;letter-spacing:.08em}#modePicker small{grid-column:2;font-size:9px;line-height:1.35;margin-top:3px}#modePicker .mode-traits{grid-column:1/-1;display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}#modePicker .mode-traits i{padding:2px 5px;border:1px solid rgba(217,192,138,.23);border-radius:8px;color:#b9a778;font:normal 8px ui-monospace,monospace}#modePicker .mode-card:not([data-mode="campaign"]) .mode-traits{display:none}#modePicker .mode-card[aria-pressed="true"] .mode-icon{border-color:var(--acc2);color:#ecfff9;box-shadow:0 0 14px rgba(95,224,176,.18),inset 0 0 14px rgba(95,224,176,.1)}
+  .mode-intel{display:grid;grid-template-columns:42px 1fr auto;gap:9px;align-items:center;margin-top:9px;padding:9px 10px;border:1px solid rgba(95,224,176,.2);border-radius:10px;background:linear-gradient(90deg,rgba(95,224,176,.075),rgba(5,15,22,.75));text-align:left}.mode-intel-icon{display:flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid rgba(127,255,212,.3);border-radius:50%;color:var(--acc2);font-size:19px}.mode-intel b{display:block;color:var(--acc2);font-size:11px;font-weight:400;margin-bottom:3px}.mode-intel p{color:#829b96;font-size:9px;line-height:1.45}.mode-intel-stats{display:flex;gap:5px;flex-direction:column;align-items:flex-end}.mode-intel-stats span{padding:2px 6px;border-radius:8px;background:rgba(0,0,0,.22);color:var(--gold);font:8px ui-monospace,monospace;white-space:nowrap}
   #menu #selectionSummary{margin:11px 0 0;padding:9px 12px;border:1px solid rgba(95,224,176,.16);background:linear-gradient(90deg,rgba(95,224,176,.09),transparent);text-align:left;font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;font-size:11px;}#menu .hi{margin:7px 0 0;text-align:right;color:#a89164;font-size:11px;}
   #menu #startBtn{position:relative;margin-top:10px;padding:15px;border-color:#80ffd8;background:linear-gradient(90deg,rgba(20,77,66,.95),rgba(13,53,54,.95),rgba(20,77,66,.95));background-size:200% 100%;color:#effffb;font-size:15px;font-weight:700;letter-spacing:.22em;box-shadow:0 0 25px rgba(95,224,176,.14),inset 0 1px rgba(255,255,255,.13);animation:ctaFlow 5s linear infinite;}#menu #startBtn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,0,0,.35),0 0 32px rgba(95,224,176,.25);}@keyframes ctaFlow{to{background-position:-200% 0}}
   #menu .menu-inline-actions{grid-template-columns:repeat(3,minmax(0,1fr));}#menu .menu-inline-actions .btn{font-size:11px;color:#9fb8b3;border-color:rgba(66,102,111,.34);background:rgba(6,15,23,.78);}#menu .how-to{border-color:rgba(66,102,111,.28);background:rgba(4,11,18,.55)}#menu .hint{margin-top:9px}#menu .version-note{margin-top:4px;color:#496561;font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;}
@@ -220,6 +222,7 @@
     #minimapWrap{right:12px;top:96px;width:132px;padding:6px}.minimap-head{font-size:8px;margin-bottom:4px}.minimap-legend{display:none}#minimapToggle{right:7px;bottom:7px}.minimap-north{top:25px}
     #minimapWrap.expanded{width:min(310px,52vw);}
     .menu-hero{grid-template-columns:1fr;gap:9px}.menu-status{justify-content:flex-start;max-width:none}#menu .panel{padding-left:16px;padding-right:16px}#menu .panel::before{margin-left:-16px;margin-right:-16px}.menu-inline-actions{grid-template-columns:1fr!important}
+    #menu .run-setup{grid-template-columns:1fr}#modePicker{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto}#modePicker .mode-card[data-mode="campaign"]{grid-column:1/-1;grid-row:auto}#modePicker .mode-card:not([data-mode="campaign"]) .mode-traits{display:flex}.mode-intel{grid-template-columns:38px 1fr}.mode-intel-stats{grid-column:1/-1;flex-direction:row;align-items:center;padding-left:47px}
   }
   @media (max-height:500px) and (orientation:landscape){
     #menu .panel{padding:0 16px 12px;}#menu .panel::before{margin:0 -16px 8px;padding:5px 10px}.menu-hero{display:block;margin-bottom:5px}#menu .menu-title{font-size:20px}.menu-eyebrow,.menu-status,#menu .sub,#menu .hi,#levelRule,.premise-card{display:none}.run-setup{grid-template-columns:1fr 1fr;margin:4px 0;gap:8px}.setup-group{padding:7px}.choice-card{min-height:55px!important;padding:6px;font-size:11px}.choice-card small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.level-select{padding:7px}.how-to{margin-top:7px}#selectionSummary{margin:5px 0 2px!important}.btn{padding:9px;margin-top:7px;}
@@ -233,6 +236,7 @@
     .top>div:first-child{max-width:72vw}.box{min-width:95px;}
     #compass{top:62px;}
     #minimapWrap,html.is-touch #minimapWrap{right:10px;top:174px;width:104px}#minimapWrap.expanded,html.is-touch #minimapWrap.expanded{right:10px;width:min(300px,76vw)}
+    #modePicker{grid-template-columns:1fr}#modePicker .mode-card[data-mode="campaign"]{grid-column:auto}.mode-intel-stats{padding-left:0}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
@@ -316,12 +320,12 @@
 <div class="premise-card"><b>大船纪元：</b>一艘质量相当于二十颗地球、来自银河之外的远古巨船，被人类船长经营成万族客轮。核心深处却悬着一颗火星大小的铁世界“髓星”。一份署名首领船长的密令召集精英下潜——但这份命令是真的吗？</div>
     <div class="run-setup">
       <section class="setup-group"><h2>潜航模式</h2><div id="modePicker" class="choice-row" aria-label="潜航模式">
-<button type="button" class="choice-card" data-mode="campaign" aria-pressed="true"><strong>第一部闯关</strong><em>主模式 · 20关</em><small>从沉默的大船推进到髓星登陆，连续完成二十个剧情战术节点。</small></button>
-<button type="button" class="choice-card" data-mode="endless" aria-pressed="false"><strong>无尽深渊</strong><em>额外模式</em><small>无限波次、每波构筑、每五波巨兽；压力与奖励不断升级。</small></button>
-<button type="button" class="choice-card" data-mode="expedition" aria-pressed="false"><strong>星髓远征</strong><em>剧情档案</em><small>从秘密登陆到重封髓星，经历五部主线与关键反转。</small></button>
-<button type="button" class="choice-card" data-mode="stage" aria-pressed="false"><strong>书记官复演</strong><em>单章</em><small>由人工智能书记官重建指定历史战场。</small></button>
-        <button type="button" class="choice-card" data-mode="bossRush" aria-pressed="false"><strong>守卫协议</strong><em>高危</em><small>关闭前置任务，连续挑战五个核心守卫。</small></button>
-      </div></section>
+<button type="button" class="choice-card mode-card" data-mode="campaign" aria-pressed="true"><span class="mode-icon">◈</span><strong>第一部闯关</strong><em>推荐 · 20 关连续剧情</em><small>从沉默的大船推进到髓星登陆，任务类型、生态和巨兽随章节更替。</small><span class="mode-traits"><i>剧情推进</i><i>跨关构筑</i><i>五只巨兽</i></span></button>
+<button type="button" class="choice-card mode-card" data-mode="endless" aria-pressed="false"><span class="mode-icon">∞</span><strong>无尽深渊</strong><em>无限波次</em><small>每波构筑，每五波巨兽。</small><span class="mode-traits"><i>排行榜</i><i>高成长</i></span></button>
+<button type="button" class="choice-card mode-card" data-mode="expedition" aria-pressed="false"><span class="mode-icon">✦</span><strong>星髓远征</strong><em>完整叙事</em><small>五部主线与关键反转。</small><span class="mode-traits"><i>多结局</i><i>物证</i></span></button>
+<button type="button" class="choice-card mode-card" data-mode="stage" aria-pressed="false"><span class="mode-icon">◎</span><strong>书记官复演</strong><em>自由选章</em><small>快速重建指定历史战场。</small><span class="mode-traits"><i>短流程</i><i>练习</i></span></button>
+<button type="button" class="choice-card mode-card" data-mode="bossRush" aria-pressed="false"><span class="mode-icon">⚠</span><strong>守卫协议</strong><em>极高风险</em><small>连续挑战核心守卫。</small><span class="mode-traits"><i>纯战斗</i><i>高倍率</i></span></button>
+      </div><div id="modeIntel" class="mode-intel" aria-live="polite"><span class="mode-intel-icon" id="modeIntelIcon">◈</span><div><b id="modeIntelTitle">第一部闯关 · 推荐</b><p id="modeIntelText">二十关连续推进，包含调查、防守、扫描、增援与阶段巨兽。</p></div><div class="mode-intel-stats"><span id="modeIntelRisk">风险：标准</span><span id="modeIntelReward">分数倍率 ×1.0</span></div></div></section>
 <section class="setup-group"><h2>船长路线</h2><div id="rolePicker" class="choice-row" aria-label="船长路线">
 <button type="button" class="choice-card" data-role="explorer" aria-pressed="true"><strong>浣生 · 调查路线</strong><em>续航</em><small>外交与现场判断；125 氧气，证据补给更强。</small></button>
         <button type="button" class="choice-card" data-role="guardian" aria-pressed="false"><strong>迈尔辛 · 工程路线</strong><em>防御</em><small>首席权限与结构学；90 生命，强化量子护盾。</small></button>
@@ -341,7 +345,7 @@
 <b>处决</b>：持续攻击削减韧性，破韧后贴近并按攻击键处决。证据信标可以恢复氧气、生命和瓷骨弹药；每关开始氧气自动补满。
     </div></details>
     <div class="hint">点击画面锁定鼠标（Esc 释放并暂停）· 引擎已本地化，离线可玩 · 若在内嵌预览中操作受限，请在新标签页打开</div>
-    <div class="version-note">v16 · 五套关卡生态、差异化证据品、第一部二十关与阶段巨兽</div>
+    <div class="version-note">v17 · 战术模式选择、五套关卡生态、第一部二十关与阶段巨兽</div>
   </div>
 </div>
 
@@ -3005,6 +3009,13 @@ const RUN_MODES={
   stage:{name:"书记官复演",short:"复演",rule:"重演所选历史节点，击败守卫后直接生成校订档案。",scoreMul:1.2,boost:2,bossHpMul:1.08},
   bossRush:{name:"守卫协议",short:"协议",rule:"跳过调查目标，连续突破五个星髓守卫。",scoreMul:1.5,boost:3,bossHpMul:1.22}
 };
+const MODE_UI={
+  campaign:{icon:"◈",label:"推荐",risk:"标准",flow:"20 关",text:"二十关连续推进，调查、防守、扫描、增援和五场阶段巨兽交替出现。"},
+  endless:{icon:"∞",label:"纪录挑战",risk:"递增",flow:"无限",text:"清空波次后立刻三选一构筑，敌群、潮压、掉落与巨兽强度无限成长。"},
+  expedition:{icon:"✦",label:"完整叙事",risk:"较高",flow:"五部",text:"体验《星髓》五部主线，以物证与洞察塑造路线并解锁不同结局。"},
+  stage:{icon:"◎",label:"自由复演",risk:"可控",flow:"单章",text:"从已解锁节点出发，快速练习任务、武器、角色技能与守卫战。"},
+  bossRush:{icon:"⚠",label:"高危协议",risk:"极高",flow:"五战",text:"跳过调查与收集，连续挑战五类核心守卫，获得最高分数倍率。"}
+};
 const DIVER_ROLES={
   explorer:{name:"浣生 · 调查路线",shortName:"浣生",voice:"浣生",maxHp:70,maxOxygen:125,oxygenDrainMul:.78,sampleOxyMul:1.5,moveMul:1,damageMul:1,weaponCoolMul:1,dashCoolMul:1,shieldDurationMul:1,shieldCoolMul:1,overdriveDurationMul:1,accent:0x63e8cf},
   guardian:{name:"迈尔辛 · 工程路线",shortName:"迈尔辛",voice:"迈尔辛",maxHp:90,maxOxygen:105,oxygenDrainMul:.96,sampleOxyMul:1.1,moveMul:.92,damageMul:.95,weaponCoolMul:1.04,dashCoolMul:1.08,shieldDurationMul:1.42,shieldCoolMul:.72,overdriveDurationMul:1,accent:0x6fa8ff},
@@ -4357,6 +4368,7 @@ function renderRunSelectionUI(){
   document.querySelectorAll("[data-role]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.role===runSelection.roleId)));
   document.querySelectorAll("[data-level]").forEach(b=>{const idx=Number(b.dataset.level);b.setAttribute("aria-pressed",String(idx===runSelection.level));b.disabled=idx>Math.max(0,storyMeta.deepest);b.title=b.disabled?"完成前一关后解锁":"选择第 "+String(idx+1).padStart(2,"0")+" 关";});
   const mode=selectedMode(),role=selectedRole(),lv=LEVELS[runSelection.level]||LEVELS[0];
+  const mui=MODE_UI[runSelection.modeId]||MODE_UI.campaign;document.getElementById("modeIntelIcon").textContent=mui.icon;document.getElementById("modeIntelTitle").textContent=mode.name+" · "+mui.label;document.getElementById("modeIntelText").textContent=mui.text;document.getElementById("modeIntelRisk").textContent="风险："+mui.risk+" · "+mui.flow;document.getElementById("modeIntelReward").textContent="分数倍率 ×"+mode.scoreMul.toFixed(2);
   hi=readRunRecord(runSelection.modeId,runSelection.level);document.getElementById("hiVal").textContent=hi;
   document.getElementById("levelRule").textContent=mode.rule;
   document.getElementById("selectionSummary").textContent="已选择："+mode.name+" · "+role.name+" · 第"+String(lv.id).padStart(2,"0")+"关 "+lv.name;
