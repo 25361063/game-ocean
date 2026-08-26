@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>潮声之下 · 无尽深渊 v13.1</title>
+<title>潮声之下 · 第一部二十关 v14</title>
 <style>
   :root{--bg:#04070c;--ink:#cfe9df;--dim:#5e736c;--acc:#5fe0b0;--acc2:#7fffd4;--blood:#e0506a;--gold:#d9c08a;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -175,6 +175,7 @@
   .level-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
   .level-choice{padding:8px 4px;border:1px solid #263b46;border-radius:8px;background:#0b1620;color:var(--ink);font-family:inherit;font-size:11px;cursor:pointer;}
   .level-choice:hover{border-color:#4a7983;background:#10212c;}
+  .level-choice:disabled{opacity:.34;cursor:not-allowed;filter:saturate(.35)}
   .level-choice[aria-pressed="true"]{color:var(--acc2);border-color:var(--acc);background:rgba(17,51,48,.8);box-shadow:0 0 9px rgba(95,224,176,.18);}
   #levelRule{display:block;color:#7a9189;font-size:11px;margin-top:7px;line-height:1.45;}
   #selectionSummary{margin:10px 0 4px;padding:7px 10px;border-radius:9px;background:rgba(95,224,176,.07);color:var(--acc2);font-size:12px;letter-spacing:.04em;}
@@ -293,12 +294,13 @@
 
 <div id="menu" class="overlay hidden">
   <div class="panel">
-<h1>潮声之下 · 无尽深渊</h1>
-<div class="sub">根据罗伯特·里德《星髓》世界观改编的无尽深渊生存战</div>
+<h1>潮声之下 · 第一部：船</h1>
+<div class="sub">根据罗伯特·里德《星髓》第一部改编的二十关连续闯关</div>
 <div class="premise-card"><b>大船纪元：</b>一艘质量相当于二十颗地球、来自银河之外的远古巨船，被人类船长经营成万族客轮。核心深处却悬着一颗火星大小的铁世界“髓星”。一份署名首领船长的密令召集精英下潜——但这份命令是真的吗？</div>
     <div class="run-setup">
       <section class="setup-group"><h2>潜航模式</h2><div id="modePicker" class="choice-row" aria-label="潜航模式">
-<button type="button" class="choice-card" data-mode="endless" aria-pressed="true"><strong>无尽深渊</strong><em>主模式</em><small>无限波次、每波构筑、每五波巨兽；压力与奖励不断升级。</small></button>
+<button type="button" class="choice-card" data-mode="campaign" aria-pressed="true"><strong>第一部闯关</strong><em>主模式 · 20关</em><small>从沉默的大船推进到髓星登陆，连续完成二十个剧情战术节点。</small></button>
+<button type="button" class="choice-card" data-mode="endless" aria-pressed="false"><strong>无尽深渊</strong><em>额外模式</em><small>无限波次、每波构筑、每五波巨兽；压力与奖励不断升级。</small></button>
 <button type="button" class="choice-card" data-mode="expedition" aria-pressed="false"><strong>星髓远征</strong><em>剧情档案</em><small>从秘密登陆到重封髓星，经历五部主线与关键反转。</small></button>
 <button type="button" class="choice-card" data-mode="stage" aria-pressed="false"><strong>书记官复演</strong><em>单章</em><small>由人工智能书记官重建指定历史战场。</small></button>
         <button type="button" class="choice-card" data-mode="bossRush" aria-pressed="false"><strong>守卫协议</strong><em>高危</em><small>关闭前置任务，连续挑战五个核心守卫。</small></button>
@@ -312,9 +314,9 @@
     <section class="level-select"><h2>出发海域</h2><div id="levelPicker" class="level-row" aria-label="出发海域">
 <button type="button" class="level-choice" data-level="0" aria-pressed="true">L1 大船</button><button type="button" class="level-choice" data-level="1" aria-pressed="false">L2 髓星</button><button type="button" class="level-choice" data-level="2" aria-pressed="false">L3 夺船</button><button type="button" class="level-choice" data-level="3" aria-pressed="false">L4 荒凉</button><button type="button" class="level-choice" data-level="4" aria-pressed="false">L5 建造者</button>
     </div><small id="levelRule">完整体验五章剧情；抉择会改变能力与最终结局。</small></section>
-<div id="selectionSummary" role="status">已选择：无尽深渊 · 浣生 · L1 大船生态舱</div>
+<div id="selectionSummary" role="status">已选择：第一部闯关 · 浣生 · 第01关 沉默的大船</div>
     <div class="hi">最高纪录：<span id="hiVal">0</span> 分</div>
-    <button class="btn" id="startBtn">开始无尽深渊</button>
+    <button class="btn" id="startBtn">开始第一部闯关</button>
     <div class="menu-inline-actions"><button class="btn sec" id="restBtn">休息站与永久升级</button><button class="btn sec" id="archiveBtn">世界与剧情档案</button><button class="btn sec" id="menuSettingsBtn">游戏设置</button></div>
     <details class="how-to"><summary>查看玩法与操作</summary><div class="goal">
       <b>操作</b>：WASD 移动 · 鼠标环顾 · 空格 跳跃 · Shift 加速 · <b>Q 闪避</b> · <b>F 髓瓷护幕</b> · <b>R 神经超频</b> · E 拾取 · 左键攻击 · 1/2/3 切换武器。<br>
@@ -322,7 +324,7 @@
 <b>处决</b>：持续攻击削减韧性，破韧后贴近并按攻击键处决。证据信标可以恢复氧气、生命和瓷骨弹药；每关开始氧气自动补满。
     </div></details>
     <div class="hint">点击画面锁定鼠标（Esc 释放并暂停）· 引擎已本地化，离线可玩 · 若在内嵌预览中操作受限，请在新标签页打开</div>
-    <div class="version-note">v13.1 · 无尽波次、每波构筑、巨兽里程碑、动态潮汐与永久进程</div>
+    <div class="version-note">v14 · 第一部二十关、连续剧情、五个阶段巨兽与跨关构筑</div>
   </div>
 </div>
 
@@ -1301,6 +1303,34 @@ const LEVELS = [
     scoreCap:375 }
 ];
 
+/* v14：第一部《船》拆分为 20 个连续战术关卡。保留五套成熟场景模板，逐关重组敌群、目标、路线与 Boss。 */
+const PART_ONE_STAGE_BLUEPRINTS=[
+  ["沉默的大船","大船拥有意识，却无法向乘员发声。先在生态海完成基础校准。","collect"],
+  ["阿尔法海校准","核对这艘行星级客轮的船体尺度、能源流和万族航线。","kill"],
+  ["雷莫拉船壳","雷莫拉人终生居住在防护服中，承担真空船壳维修。","collect"],
+  ["维修义务","迈尔辛设计的维修制度改变了雷莫拉文化，也积累了长久裂痕。","kill","reefCrab"],
+  ["翡尼克斯余烬","浣生曾爱上拒绝永生的翡尼克斯人；一次叛乱留下永久死亡。","elite"],
+  ["浣生的旧伤","职责、异族与失去塑造了浣生此后的每一次判断。","collect"],
+  ["盖亚裁决","帕米尔曾用激进方法处理两个盖亚生命体冲突，并因此被革职。","survive"],
+  ["帕米尔归来","失踪事件迫使首领重新启用这位危险而可靠的前船长。","kill","kelpLeviathan"],
+  ["首领的召集","数十名精英船长收到一份必须绝对保密的潜伏命令。","collect"],
+  ["黑色阿尔法","最高等级协议要求船长切断日常联系，独自前往秘密会合点。","kill"],
+  ["失踪的船长们","同一时间离开的船长过多，常规航务记录却被悄然抹平。","elite"],
+  ["中微子幽灵","五十三年前的撞击波暴露了来自核心深处的异常中微子流。","kill","abyssJelly"],
+  ["空心内核","扫描证明大船内部并非实心，厚重船壳之下存在巨大空腔。","collect"],
+  ["二十地球质量","如此庞大的结构仍能航行，现有文明不可能是它的建造者。","survive"],
+  ["铁世界信号","空腔中央悬着一颗火星大小、质量惊人的金属行星。","collect"],
+  ["支撑力场","蓝白量子力场托住铁世界，也会侵蚀生命与机器。","kill","voidWhale"],
+  ["髓星命名","首领将那颗隐秘世界命名为髓星，并宣布一次不可公开的远征。","elite"],
+  ["密令疑点","全息形象、权限签名和物理源地址之间出现无法忽视的矛盾。","collect"],
+  ["秘密基地","登陆队在燃料罐下方集结，桥梁与生物改造方案全部就绪。","kill"],
+  ["向髓星下潜","第一部终点：穿过船壳豁口，在骗局尚未显形前踏上髓星。","kill","handX"]
+];
+const LEGACY_LEVEL_TEMPLATES=LEVELS.slice();
+function partOneStageMonsters(stage,kind){const count=Math.min(11,2+Math.ceil(stage*.42)),types=["gray","dart","spitter","elite"],available=Math.min(4,1+Math.ceil(stage/5)),out=[];for(let i=0;i<count;i++){let type=types[(stage+i*2)%available];if(kind==="elite"&&i===0)type="elite";const a=stage*.71+i*2.37,r=13+(i%4)*7;out.push({type,x:Math.round(Math.cos(a)*r),z:Math.round(Math.sin(a)*r)});}return out;}
+function buildPartOneStages(){return PART_ONE_STAGE_BLUEPRINTS.map((bp,i)=>{const stage=i+1,t=LEGACY_LEVEL_TEMPLATES[i%LEGACY_LEVEL_TEMPLATES.length],kind=bp[2],monsters=partOneStageMonsters(stage,kind),target=Math.min(6,3+Math.floor(stage/6));let objective=kind==="collect"?{kind:"collect",n:target}:kind==="survive"?{kind:"survive",t:24+stage}:kind==="elite"?{kind:"elite",type:"elite"}:{kind:"kill",n:monsters.length};return {id:stage,name:bp[0],theme:t.theme,terrain:Object.assign({},t.terrain),obstacles:t.obstacles.map(o=>Object.assign({},o)),sampleSpots:t.sampleSpots.slice(0,8).map((p,j)=>({x:p.x+(i%3-1)*2,z:p.z+((i+j)%3-1)*2})),sampleTarget:target,gatePos:Object.assign({},t.gatePos),monsters,boss:bp[3]||null,objective,scoreCap:120+stage*28,partOne:true,beat:bp[1]};});}
+LEVELS.splice(0,LEVELS.length,...buildPartOneStages());
+
 /* ---- 关卡配置校验（防软锁：kill 目标 n ≤ 怪物总数） ---- */
 function validateLevel(cfg){
   if(!cfg) return null;
@@ -1363,7 +1393,7 @@ function freshRun(levelCfg){
       level:levelCfg.id, objective:Object.assign({},levelCfg.objective), boost,
       sampleSpots:levelCfg.sampleSpots, sampleTarget:levelCfg.sampleTarget,
       gatePos:gp, obstacles:levelCfg.obstacles, scoreCap:levelCfg.scoreCap,
-      terrain:levelCfg.terrain, spitPulses:[], enemyHazards:[], monsters
+      terrain:levelCfg.terrain, partOne:!!levelCfg.partOne,partOneBeat:levelCfg.beat||"",spitPulses:[], enemyHazards:[], monsters
     };
   }
   return {
@@ -2945,6 +2975,7 @@ const saved = SAVE ? SAVE.loadSave(storage) : null;
 const settings = { sensitivity: 0.45, mute: false, vibrate: true, reduceFlicker: false, aimAssist: true };
 /* v9：可实际改变通关路径与角色数值的运行配置。单独存储，兼容旧版存档。 */
 const RUN_MODES={
+  campaign:{name:"第一部闯关",short:"第一部",rule:"二十关连续推进《星髓》第一部剧情；每四关出现阶段巨兽，第20关完成髓星登陆。",scoreMul:1,boost:1,bossHpMul:1},
   endless:{name:"无尽深渊",short:"无尽",rule:"无限波次生存；每波结束三选一，每五波出现巨型 Boss，敌人、潮压与奖励同步升级。",scoreMul:1.15,boost:1,bossHpMul:1},
   expedition:{name:"星髓远征",short:"远征",rule:"完整体验原著五部主线；物证与洞察共同解锁原著结局。",scoreMul:1,boost:2,bossHpMul:1},
   stage:{name:"书记官复演",short:"复演",rule:"重演所选历史节点，击败守卫后直接生成校订档案。",scoreMul:1.2,boost:2,bossHpMul:1.08},
@@ -2973,7 +3004,13 @@ const STORY_CHAPTERS=[
   {id:4,title:"第四部 · 荒凉",name:"雷莫拉战线",summary:"内战、防护盾崩溃，以及监狱假说。",intro:"违望者进攻船壳城市，雷莫拉人破坏引擎与防护盾反抗。浣生返回髓星提出新假说：大船不是由行星改造而来，而是早期宇宙的建造者从物质源头逐层制造的监狱。撑过九十秒战争潮，切断违望者脊柱。",sample:["证据 10：髓星核心持续创造物质与反物质，整艘大船可能从核心向外生长。","证据 11：量子支撑力场不是桥梁，而是维持一百五十亿年的囚笼。","证据 12：‘荒凉’能越过囚笼影响笛雾、提欧和大船引擎；所谓守卫可能早已叛变。"],bossAwake:"失控航鲸接入脊柱，正在把荒凉的命令转发给全部十四座喷嘴。它会冲撞、召唤护航群并释放反物质脉冲。",bossDown:"脊柱断裂，迈尔辛以生命拖住提欧。帕米尔关停液氢洪水；浣生拒绝用数十亿髓星居民换取胜利。",question:"战争中，目标与手段必须同时受检验。",seal:{label:"保护大船",desc:"物证 +1 · 最大生命 +4",result:"你破坏引擎控制链，却保留船体承重、防护与生命维持系统。"},echo:{label:"拒绝屠星",desc:"洞察 +1 · 最大氧气 +5",result:"液氢威胁只是一场骗局。你在洪水落下前关泵，为髓星居民保留生路。"}},
   {id:5,title:"第五部 · 建造者",name:"建造者囚室",summary:"阻止恒星撞击，重封髓星，大船驶向室女座。",intro:"荒凉已控制引擎，要让大船擦过红巨星并坠入伴生黑洞。黑洞也许毁不掉它，反而会释放它。击溃最后的控制代行体，让百族破坏喷嘴、关闭阀门，并帮助会思考的大船第一次发出自己的选择。",sample:["证据 13：大船拥有意识；它听见了船员的行动，并在最后协助他们关闭正确的阀门。","证据 14：一团月球大小的铁镍物质撞击船侧，使大船避开红巨星。","证据 15：新的航线将离开银河，数千年后驶向室女座星团；髓星必须重新封闭。"],bossAwake:"建造者囚室代行体同时复制五类怪物技能，并借引擎震波改变战场。不要回应它的许诺，只攻击可验证的控制节点。",bossDown:"最后的喷嘴熄灭。大船避开恒星与黑洞，主动驶向星系间的黑暗。髓星上方等待着最后一道封闭命令。",question:"你要为这艘船选择怎样的未来？"}
 ];
+const PART_ONE_RESOLUTIONS=[
+  "校准完成。记录仪捕捉到一种无法归类的船体反馈，仿佛大船在注视船员。","阿尔法海航图恢复，万族城市与行星级管线在同一张图上展开。","雷莫拉维护日志证明，船壳上的生命并非附属品，而是大船不可替代的守护者。","失控清道夫停止运转；维修义务带来的贡献与伤痕都被写入档案。","翡尼克斯遗物被安全回收，浣生拒绝让永久死亡只剩一个统计数字。","浣生重新接过调查权限，但保留了对最高命令的怀疑。","盖亚冲突复演结束；帕米尔的方案危险，却阻止了更大的灭绝。","帕米尔通过复职校验，首领需要他的直觉来寻找失踪者。","召集名单完成核验，离开的全是最有经验、也最难被替代的船长。","黑色阿尔法协议被确认，它要求绝对服从，也切断了所有外部见证。","被抹去的航务痕迹重新出现：这不是普通任务，而是一场精心隐藏的集体消失。","中微子守卫崩解，信号源明确位于大船最深处。","空腔模型完成，所谓行星改造理论第一次出现致命裂缝。","结构压力测试通过；二十颗地球质量背后的建造技术仍无法解释。","铁世界的质量与尺寸得到交叉确认，它不是幻象，也不是普通行星。","支撑场中继关闭，通往空腔的安全窗口短暂出现。","髓星之名写入绝密档案，一支精英登陆队正式成形。","权限核验留下疑点：命令看似来自首领，却缺少应有的物理来源链。","秘密基地完成接驳，船员接受为登陆而设计的身体改造。","豁口守卫倒下，登陆桥伸向髓星。第一部结束，而真正的骗局刚刚开始。"
+];
+const PART_ONE_STORY=PART_ONE_STAGE_BLUEPRINTS.map((bp,i)=>({id:i+1,title:"第一部 · 船 / "+String(i+1).padStart(2,"0"),name:bp[0],summary:bp[1],intro:bp[1]+" 本关完成战术节点后，沿下行舱门继续推进。",sample:["现场证据："+bp[1],"书记官核验：该记录与大船的结构、航务和船长档案相互印证。","风险提示：任何最高权限命令都必须同时通过来源、物证与行为逻辑校验。"],bossAwake:bp[3]?"章节核心守卫封锁了本段航路。击败它才能继续调查。":"本段防卫协议已进入最高警戒。",bossDown:PART_ONE_RESOLUTIONS[i],question:"继续沿第一部航线推进。"}));
+STORY_CHAPTERS.splice(0,STORY_CHAPTERS.length,...PART_ONE_STORY);
 const STORY_ENDINGS={
+  partOne:{tag:"第一部完成 · 髓星之前",title:"登陆桥伸向铁世界",sub:"二十个战术节点全部解除。精英船长穿过大船内核的豁口，向被量子力场托住的髓星下降；那份密令仍带着无法解释的疑点。",choice:"继续登陆髓星",detail:"《星髓》第一部二十关闯关完成。"},
   seal:{tag:"结局 I · 重封髓星",title:"监狱重新闭合",sub:"你切断脊柱、封死腔壁豁口，让荒凉再次与大船隔绝。旧首领复生，浣生担任首席；危险暂时结束，但关于建造者的问题仍无答案。",choice:"重封髓星",detail:"优先隔离荒凉并修复大船。"},
   release:{tag:"结局 II · 荒凉航路",title:"囚犯接管了航向",sub:"你误把荒凉的声音当成建造者启示。引擎重新点火，大船朝黑洞坠落；建造者当年不愿摧毁、只能放逐的东西即将获得自由。",choice:"接受荒凉",detail:"高风险非正史结局。"},
   chorus:{tag:"原著结局 · 驶向室女座",title:"大船选择星系间的黑暗",sub:"百族与人工智能共同关闭引擎，大船也第一次主动帮助船员。髓星被重新封闭，浣生任首席；航线离开银河，驶向遥远的室女座星团。",choice:"联合百族并重封监狱",detail:"物证与洞察并重时解锁的完整结局。"},
@@ -2982,7 +3019,7 @@ const STORY_ENDINGS={
 };
 const STORY_META_KEY="chaosheng_dive3d_story_v1";
 let storyMeta={endings:[],deepest:0};
-try{const raw=storage&&storage.getItem(STORY_META_KEY),m=raw?JSON.parse(raw):null;if(m&&Array.isArray(m.endings))storyMeta={endings:m.endings.filter(k=>STORY_ENDINGS[k]),deepest:Math.max(0,Math.min(5,Number(m.deepest)||0))};}catch(e){}
+try{const raw=storage&&storage.getItem(STORY_META_KEY),m=raw?JSON.parse(raw):null;if(m&&Array.isArray(m.endings))storyMeta={endings:m.endings.filter(k=>STORY_ENDINGS[k]),deepest:Math.max(0,Math.min(20,Number(m.deepest)||0))};}catch(e){}
 let storyRun={order:0,echo:0,choices:{},ending:null,startLevel:0,roleId:"explorer",modeId:"expedition"};
 function resetStoryRun(){storyRun={order:0,echo:0,choices:{},ending:null,startLevel:runSelection.level,roleId:runSelection.roleId,modeId:runSelection.modeId};}
 function saveStoryMeta(){try{if(storage)storage.setItem(STORY_META_KEY,JSON.stringify(storyMeta));}catch(e){}}
@@ -2996,11 +3033,11 @@ function saveMeta(){try{if(storage)storage.setItem(META_KEY,JSON.stringify(meta)
 function grantCurrency(n,reason){n=Math.max(0,Math.floor(n||0));if(!n)return;meta.currency+=n;saveMeta();if(reason)toast("船币 +"+n+" · "+reason);}
 const ACHIEVEMENTS={firstBlood:{name:"第一滴血",desc:"首次击败敌人",reward:10},streak10:{name:"毫不停息",desc:"达成 10 连杀",reward:25},deepDive:{name:"髓星深潜",desc:"抵达第五关",reward:35},reborn:{name:"重生许可",desc:"首次使用续命",reward:20},builder:{name:"建造者之问",desc:"发现任一完整结局",reward:50}};
 function unlockAchievement(id){const a=ACHIEVEMENTS[id];if(!a||meta.achievements[id])return;meta.achievements[id]=true;meta.currency+=a.reward;saveMeta();showTransmission("成就解锁",a.name+" · 船币 +"+a.reward,4200);}
-const RUN_SELECTION_KEY="chaosheng_dive3d_v131_selection";
-let runSelection={modeId:"endless",roleId:"explorer",level:0};
+const RUN_SELECTION_KEY="chaosheng_dive3d_v14_selection";
+let runSelection={modeId:"campaign",roleId:"explorer",level:0};
 try{
   const raw=storage&&storage.getItem(RUN_SELECTION_KEY),s=raw?JSON.parse(raw):null;
-  if(s&&RUN_MODES[s.modeId]&&DIVER_ROLES[s.roleId]&&Number.isInteger(s.level))runSelection={modeId:s.modeId,roleId:s.roleId,level:Math.max(0,Math.min(4,s.level))};
+  if(s&&RUN_MODES[s.modeId]&&DIVER_ROLES[s.roleId]&&Number.isInteger(s.level))runSelection={modeId:s.modeId,roleId:s.roleId,level:Math.max(0,Math.min(19,s.level))};
 }catch(e){}
 function persistRunSelection(){try{if(storage)storage.setItem(RUN_SELECTION_KEY,JSON.stringify(runSelection));}catch(e){}}
 function runRecordKey(modeId,startLevel){return "chaosheng_dive3d_hi_v10_"+modeId+"_L"+(Number(startLevel)+1);}
@@ -3791,7 +3828,7 @@ function applyLevelPalette(){
     {fog:0x0c111a,top:0x182438,bottom:0x010207,light:0x8fb4d9,ground:0x707c80,rock:0x5b656b,accent:0x7aa6bd,water:0x375d72,rim:0xc07658,near:15,far:74,ex:.93},
     {fog:0x110b18,top:0x2a1832,bottom:0x020105,light:0xe09fcc,ground:0x7d7484,rock:0x655a6d,accent:0xd584cf,water:0x76507d,rim:0xc04d8a,near:13,far:68,ex:.95}
   ];
-  const p=palettes[Math.max(0,Math.min(4,((G&&G.level)||1)-1))];
+  const p=palettes[Math.max(0,(((G&&G.level)||1)-1)%palettes.length)];
   currentVisualPalette=p;
   scene.fog.color.setHex(p.fog);scene.background.setHex(p.bottom);
   scene.fog.near=lowQ?Math.max(9,p.near-4):p.near;scene.fog.far=lowQ?p.far*.76:p.far;
@@ -3908,14 +3945,14 @@ function applyRunProfile(g){
   return g;
 }
 function createConfiguredLevel(idx,carry,resetModeBoost){
-  const mode=RUN_MODES[runSelection.modeId]||RUN_MODES.expedition;if(resetModeBoost)setMonsterBoost(mode.boost);
-  return applyRunProfile(startLevel(idx,carry));
+  const mode=RUN_MODES[runSelection.modeId]||RUN_MODES.campaign;if(runSelection.modeId==="campaign")setMonsterBoost(idx<6?1:(idx<14?2:3));else if(resetModeBoost)setMonsterBoost(mode.boost);
+  const g=applyRunProfile(startLevel(idx,carry));if(g.modeId==="campaign"&&g.boss){const mul=1+Math.floor(idx/4)*.16;g.boss.maxHp=Math.ceil(g.boss.maxHp*mul);g.boss.hp=g.boss.maxHp;}return g;
 }
 let levelIntroTimer=0;
 function showLevelIntro(lv){
   const el=document.getElementById("levelIntro"),mode=selectedMode(),role=selectedRole();
-  document.getElementById("levelIntroTitle").textContent=G.modeId==="endless"?"无尽深渊 · 第 1 波":("L"+lv.id+" · "+lv.name);
-document.getElementById("levelIntroSub").textContent=(G.modeId==="endless"?"清场即可构筑 · 每五波巨兽里程碑":"本关氧气与生命已补满 "+Math.round(G.oxygen)+"/"+G.maxOxygen)+" · "+mode.name+" · "+role.name;
+  document.getElementById("levelIntroTitle").textContent=G.modeId==="endless"?"无尽深渊 · 第 1 波":(G.modeId==="campaign"?("第 "+String(lv.id).padStart(2,"0")+" 关 · "+lv.name):("L"+lv.id+" · "+lv.name));
+document.getElementById("levelIntroSub").textContent=(G.modeId==="endless"?"清场即可构筑 · 每五波巨兽里程碑":"生命与氧气已补满 · "+(lv.beat||("当前状态 "+Math.round(G.oxygen)+"/"+G.maxOxygen)))+" · "+mode.name+" · "+role.name;
   el.classList.add("show");clearTimeout(levelIntroTimer);levelIntroTimer=setTimeout(()=>el.classList.remove("show"),2300);
 }
 function updateRunBadge(){const m=selectedMode(),r=selectedRole();document.getElementById("runBadge").textContent=m.short+" · "+(r.shortName||r.name);}
@@ -4135,7 +4172,7 @@ function tickPressure(dt){
 }
 
 /* v13.1 无尽深渊：清场、构筑、升级波次；每五波用本章巨兽制造奖励峰值。 */
-const ENDLESS_TYPES=["gray","dart","spitter","elite"],ENDLESS_BOSSES=["reefCrab","inkWhale","crystalHand","spineEel","handX"];
+const ENDLESS_TYPES=["gray","dart","spitter","elite"],ENDLESS_BOSSES=["reefCrab","kelpLeviathan","abyssJelly","voidWhale","handX"];
 function endlessMonster(type,x,z,wave){const t=MONSTER_TYPES[type]||MONSTER_TYPES.gray,hp=Math.max(1,Math.ceil(t.hp*(1+(wave-1)*.13+(type==="elite"?.3:0)))),m={type,x,z,hp,maxHp:hp,cd:0,phase:Math.random()*6.28,score:Math.ceil((t.score||20)*(1+wave*.06)),base:{x,z}};if(type==="dart")m.lunge={phase:"cruise",t:0,cd:0,dx:0,dz:0};if(type==="spitter")m.spit={windup:0,cd:0};if(t.bossBar)m.bossBar=true;if(soulOn){const moves=SOUL_MOVES[type],poise=SOUL_POISE[type];if(moves&&moves.length)m.moves=moves;if(poise)m.poise={max:poise.max,cur:0,regen:poise.regen,regenDelay:poise.regenDelay,lastHit:0};}return m;}
 function endlessBoss(type,wave){const bt=BOSS_TYPES[type]||BOSS_TYPES.handX,gp=gatePos(),hp=Math.ceil(bt.hp*(1+(wave-1)*.1)),b=Object.assign({},bt,{type,x:gp.x,z:gp.z,cd:0,hp,maxHp:hp});if(soulOn){const moves=SOUL_MOVES[type]||SOUL_MOVES.hand,poise=SOUL_POISE[type]||SOUL_POISE.hand;if(moves&&moves.length)b.moves=moves;if(poise)b.poise={max:poise.max,cur:0,regen:poise.regen,regenDelay:poise.regenDelay,lastHit:0};}return b;}
 function prepareEndlessWave(wave,rebuild){
@@ -4241,22 +4278,24 @@ if(saved && saved.settings){
 }
 
 /* v9：菜单选择与本地记忆。三种模式均绑定真实逻辑分支。 */
-function selectedMode(){return RUN_MODES[runSelection.modeId]||RUN_MODES.expedition;}
+function selectedMode(){return RUN_MODES[runSelection.modeId]||RUN_MODES.campaign;}
 function selectedRole(){return DIVER_ROLES[runSelection.roleId]||DIVER_ROLES.explorer;}
+function rebuildStagePicker(){const box=document.getElementById("levelPicker");if(!box)return;box.innerHTML="";for(const lv of LEVELS){const b=document.createElement("button");b.type="button";b.className="level-choice";b.dataset.level=String(lv.id-1);b.textContent=String(lv.id).padStart(2,"0")+" "+lv.name;box.appendChild(b);}}
 function renderRunSelectionUI(){
   document.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===runSelection.modeId)));
   document.querySelectorAll("[data-role]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.role===runSelection.roleId)));
-  document.querySelectorAll("[data-level]").forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.level)===runSelection.level)));
+  document.querySelectorAll("[data-level]").forEach(b=>{const idx=Number(b.dataset.level);b.setAttribute("aria-pressed",String(idx===runSelection.level));b.disabled=idx>Math.max(0,storyMeta.deepest);b.title=b.disabled?"完成前一关后解锁":"选择第 "+String(idx+1).padStart(2,"0")+" 关";});
   const mode=selectedMode(),role=selectedRole(),lv=LEVELS[runSelection.level]||LEVELS[0];
   hi=readRunRecord(runSelection.modeId,runSelection.level);document.getElementById("hiVal").textContent=hi;
   document.getElementById("levelRule").textContent=mode.rule;
-  document.getElementById("selectionSummary").textContent="已选择："+mode.name+" · "+role.name+" · L"+lv.id+" "+lv.name;
+  document.getElementById("selectionSummary").textContent="已选择："+mode.name+" · "+role.name+" · 第"+String(lv.id).padStart(2,"0")+"关 "+lv.name;
   document.getElementById("startBtn").textContent="开始"+mode.name;
   document.documentElement.style.setProperty("--role","#"+role.accent.toString(16).padStart(6,"0"));
 }
 document.getElementById("modePicker").addEventListener("click",e=>{const b=e.target.closest("[data-mode]");if(!b)return;runSelection.modeId=b.dataset.mode;persistRunSelection();renderRunSelectionUI();});
 document.getElementById("rolePicker").addEventListener("click",e=>{const b=e.target.closest("[data-role]");if(!b)return;runSelection.roleId=b.dataset.role;persistRunSelection();renderRunSelectionUI();});
-document.getElementById("levelPicker").addEventListener("click",e=>{const b=e.target.closest("[data-level]");if(!b)return;runSelection.level=Math.max(0,Math.min(4,Number(b.dataset.level)||0));persistRunSelection();renderRunSelectionUI();});
+document.getElementById("levelPicker").addEventListener("click",e=>{const b=e.target.closest("[data-level]");if(!b)return;runSelection.level=Math.max(0,Math.min(19,Number(b.dataset.level)||0));persistRunSelection();renderRunSelectionUI();});
+rebuildStagePicker();
 renderRunSelectionUI();
 
 /* v13 休息站：永久升级、功能解锁与成就一览。 */
@@ -4337,6 +4376,7 @@ function applyFinalDecision(key){
 function roleChapterLine(level){const a=ROLE_CHAPTER_LINES[runSelection.roleId]||ROLE_CHAPTER_LINES.explorer;return a[Math.max(0,Math.min(4,level-1))];}
 function openingPagesFor(level,fullOpening){
   const ch=STORY_CHAPTERS[level-1]||STORY_CHAPTERS[0],pages=[];
+  if(runSelection.modeId==="campaign"){if(fullOpening)pages.push(storyPage("第一部 · 船","沉默世界的二十道门","大船","我能看见进入船体的每一个生命，却无法让他们听见我。如今，一份黑色阿尔法密令正把最优秀的船长引向我的核心。"));pages.push(storyPage(ch.title,"第 "+String(level).padStart(2,"0")+" 关 · "+ch.name,"书记官",ch.intro));return pages;}
   if(fullOpening)pages.push(...STORY_PROLOGUE);
   if(fullOpening&&runSelection.level>0)pages.push(storyPage("此前提要 · 书记官校订","从指定历史节点开始","书记官","前序已压缩：大船来自银河之外；笛雾伪造首领密令与建造者档案，把船长困在髓星；提欧明知骗局仍组织违望者，并可能受到更深层意志影响。"));
   if(fullOpening)pages.push(storyPage("潜航员个人记录",selectedRole().name,selectedRole().shortName,ROLE_STORY[runSelection.roleId].intro));
@@ -4354,6 +4394,11 @@ function finalChoiceOptions(){
 }
 function chapterExitNarrative(level,carry,nextIdx){
   const ch=STORY_CHAPTERS[level-1]||STORY_CHAPTERS[0],mode=G.modeId||runSelection.modeId;storyMeta.deepest=Math.max(storyMeta.deepest,level);saveStoryMeta();
+  if(mode==="campaign"){
+    if(nextIdx!==null){openStorySequence([storyPage(ch.title,"第 "+String(level).padStart(2,"0")+" 关完成",selectedRole().shortName,ch.bossDown)],()=>{loadLevel(nextIdx,carry);showChapterOpening(nextIdx+1,false,resumeAfterStory);});}
+    else{G.storyEnding="partOne";if(storyMeta.endings.indexOf("partOne")<0)storyMeta.endings.push("partOne");saveStoryMeta();unlockAchievement("builder");openStorySequence([storyPage("第一部 · 船","二十关完成","大船",ch.bossDown+"\n\n登陆桥已经伸向髓星。下一部的灾难，将从这次下潜开始。")],()=>setOver(true));}
+    return;
+  }
   if(mode==="stage"){
     G.storyEnding="archive";openStorySequence([storyPage(ch.title,"本章档案已校订","书记官",ch.bossDown+"\n\n这是一次历史复演，不会覆盖完整远征的抉择。")],()=>setOver(true));return;
   }
@@ -4625,7 +4670,7 @@ function updateObjectiveUI(){
   else if(objectiveMet()){text="守卫协议已解除 · 进入下行舱门";complete=true;}
   else if(obj.kind === "collect"){
     complete = G.samples >= (obj.n||G.sampleTarget||TARGET_SAMPLES);
-    text = complete ? "残忆回收完成 · 前往下行舱门" : ("回收星髓残片 · " + G.samples + "/" + (obj.n||G.sampleTarget||TARGET_SAMPLES));
+    text = complete ? "证据核验完成 · 前往下行舱门" : ("回收现场证据 · " + G.samples + "/" + (obj.n||G.sampleTarget||TARGET_SAMPLES));
   } else if(obj.kind === "kill"){
     complete = (G.kills||0) >= obj.n;
     text = complete ? "维护节点已清除 · 前往主缆井" : ("断开失控维护体 · " + (G.kills||0) + "/" + obj.n);
@@ -4713,7 +4758,7 @@ function setOver(win){
   // S8：结算明细（样本 x/8、灰手击杀 x/4、本局用时）+ CSD-M2：关卡进度；CSD-H2：追加死因行
   document.getElementById("overDetail").innerHTML =
     "模式 <b>" + ((RUN_MODES[G.modeId]||RUN_MODES.expedition).name) + "</b>　·　潜航员 <b>" + ((DIVER_ROLES[G.roleId]||DIVER_ROLES.explorer).name) + "</b><br>" +
-    "星髓残片 <b>" + G.samples + "/" + (G.sampleTarget||TARGET_SAMPLES) + "</b>　·　解除维护体 <b>" + (G.kills||0) + "/" + (G.monsters ? G.monsters.length : MONSTER_SPOTS.length) + "</b><br>" +
+    "现场证据 <b>" + G.samples + "/" + (G.sampleTarget||TARGET_SAMPLES) + "</b>　·　解除维护体 <b>" + (G.kills||0) + "/" + (G.monsters ? G.monsters.length : MONSTER_SPOTS.length) + "</b><br>" +
     "本次下潜用时 <b>" + fmtTime(G.runTime||G.time) + "</b>" +
     (G.level !== undefined ? ("<br>抵达关卡 <b>L" + G.level + " " + (LEVELS[G.level-1] ? LEVELS[G.level-1].name : "") + "</b>") : "") +
     "<br>局内构筑 <b>"+runBuild.picks+"</b> 次　·　最高连杀 <b>"+meta.bestStreak+"</b>　·　永久船币 <b>"+meta.currency+"</b>"+
@@ -5293,8 +5338,8 @@ globalThis.__D3D = {
   minimap: ()=>({ready:!!minimapCtx,level:G?G.level:0,expanded:minimapExpanded,width:minimapEl.width,height:minimapEl.height,
     monsters:G?(G.monsters||[]).filter(m=>m&&m.hp>0).length:0,boss:!!(G&&G.boss&&G.boss.hp>0),portal:!!G,portalOpen:!!(G&&objectiveMet()),samples:G?(G.sampleSpots||SAMPLE_SPOTS).filter((s,i)=>!(G.grabbed&&G.grabbed[i])).length:0}),
   qaToggleMinimap:qaEnabled?(on)=>{setMinimapExpanded(on===undefined?!minimapExpanded:!!on);return globalThis.__D3D.minimap();}:undefined,
-  qaStart:qaEnabled?(o)=>{o=o||{};if(RUN_MODES[o.modeId])runSelection.modeId=o.modeId;if(DIVER_ROLES[o.roleId])runSelection.roleId=o.roleId;if(Number.isInteger(o.level))runSelection.level=Math.max(0,Math.min(4,o.level));persistRunSelection();renderRunSelectionUI();startGame(false);if(storyModalActive)finishStorySequence();return globalThis.__D3D.get();}:undefined,
-  qaStartStory:qaEnabled?(o)=>{o=o||{};if(RUN_MODES[o.modeId])runSelection.modeId=o.modeId;if(DIVER_ROLES[o.roleId])runSelection.roleId=o.roleId;if(Number.isInteger(o.level))runSelection.level=Math.max(0,Math.min(4,o.level));persistRunSelection();renderRunSelectionUI();startGame(false);return globalThis.__D3D.get();}:undefined,
+  qaStart:qaEnabled?(o)=>{o=o||{};if(RUN_MODES[o.modeId])runSelection.modeId=o.modeId;if(DIVER_ROLES[o.roleId])runSelection.roleId=o.roleId;if(Number.isInteger(o.level))runSelection.level=Math.max(0,Math.min(19,o.level));persistRunSelection();renderRunSelectionUI();startGame(false);if(storyModalActive)finishStorySequence();return globalThis.__D3D.get();}:undefined,
+  qaStartStory:qaEnabled?(o)=>{o=o||{};if(RUN_MODES[o.modeId])runSelection.modeId=o.modeId;if(DIVER_ROLES[o.roleId])runSelection.roleId=o.roleId;if(Number.isInteger(o.level))runSelection.level=Math.max(0,Math.min(19,o.level));persistRunSelection();renderRunSelectionUI();startGame(false);return globalThis.__D3D.get();}:undefined,
   qaStoryAdvance:qaEnabled?(value)=>{if(storyModalActive){const p=storyPages[storyPageIndex],choice=p&&Array.isArray(p.choices)?p.choices.find(c=>c.value===value):null;if(choice)chooseStoryOption(choice);else if(!p?.choices)advanceStoryPage();}return globalThis.__D3D.get();}:undefined,
   qaStorySkip:qaEnabled?()=>{if(storyModalActive)skipStorySection();return globalThis.__D3D.get();}:undefined,
   qaFire:qaEnabled?()=>{fireFromCamera();return globalThis.__D3D.get();}:undefined,
@@ -5303,7 +5348,8 @@ globalThis.__D3D = {
   qaShowBoss:qaEnabled?()=>{if(G&&G.boss&&bossMesh){clearTelegraphRings();bossRing.visible=false;gateGroup.visible=false;gateBeam.visible=false;G.enemyHazards=[];G.boss.phaseLock=999;G.boss.atk=null;G.boss.feint=null;G.boss.warn=false;bossMesh.visible=true;const d=bossMesh.userData||{};bossMesh.scale.setScalar(d.baseScale||1);bossMesh.position.set(G.boss.x,terrainHeight(G.boss.x,G.boss.z)+(d.hover||2.4),G.boss.z);document.getElementById("levelIntro").classList.remove("show");}return globalThis.__D3D.get();}:undefined,
   qaCompleteLevel:qaEnabled?()=>{if(G){G.samples=sampleTarget();G.kills=999;if(G.objective&&G.objective.t)G.time=Math.max(G.time,G.objective.t);for(const m of G.monsters||[])m.hp=0;if(G.boss)G.boss.hp=0;G.winOpen=true;const p=gatePos();player.x=p.x;player.z=p.z;player.y=terrainHeight(p.x,p.z)+1.7;G.state=S.PLAYING;}return globalThis.__D3D.get();}:undefined,
   qaSetResources:qaEnabled?(hp,oxygen)=>{if(G){G.hp=Math.max(0,Math.min(G.maxHp,Number(hp)));G.oxygen=Math.max(0,Math.min(G.maxOxygen,Number(oxygen)));}return globalThis.__D3D.get();}:undefined,
-  qaLoadLevel:qaEnabled?(i)=>{loadLevel(Math.max(0,Math.min(4,i|0)),{score:G?G.score:0,ammo:G?G.ammo:4,runTime:G?G.runTime:0});return globalThis.__D3D.get();}:undefined,
+  qaLoadLevel:qaEnabled?(i)=>{loadLevel(Math.max(0,Math.min(19,i|0)),{score:G?G.score:0,ammo:G?G.ammo:4,runTime:G?G.runTime:0});return globalThis.__D3D.get();}:undefined,
+  qaCampaign:qaEnabled?()=>({count:LEVELS.length,invalid:LEVELS.map((lv,i)=>validateLevel(lv)?{stage:i+1,error:validateLevel(lv)}:null).filter(Boolean),stages:LEVELS.map(lv=>({id:lv.id,name:lv.name,objective:lv.objective,boss:lv.boss,monsters:lv.monsters.length,beat:lv.beat}))}):undefined,
   qaEndlessClear:qaEnabled?()=>{if(G&&G.modeId==="endless"){for(const m of G.monsters||[])m.hp=0;if(G.boss)G.boss.hp=0;G.kills=G.objective?.n||0;G.state=S.PLAYING;tickEndless();}return {state:globalThis.__D3D.get(),wave:G?.endless||null,build:runBuild.pending};}:undefined,
   qaEndlessWave:qaEnabled?(wave)=>{if(G&&G.modeId==="endless")prepareEndlessWave(Math.max(1,wave|0),true);return {state:globalThis.__D3D.get(),wave:G?.endless||null};}:undefined
 };
