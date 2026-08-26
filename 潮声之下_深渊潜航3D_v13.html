@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>潮声之下 · 第一部二十关 v15</title>
+<title>潮声之下 · 第一部二十关 v16</title>
 <style>
   :root{--bg:#04070c;--ink:#cfe9df;--dim:#5e736c;--acc:#5fe0b0;--acc2:#7fffd4;--blood:#e0506a;--gold:#d9c08a;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -341,7 +341,7 @@
 <b>处决</b>：持续攻击削减韧性，破韧后贴近并按攻击键处决。证据信标可以恢复氧气、生命和瓷骨弹药；每关开始氧气自动补满。
     </div></details>
     <div class="hint">点击画面锁定鼠标（Esc 释放并暂停）· 引擎已本地化，离线可玩 · 若在内嵌预览中操作受限，请在新标签页打开</div>
-    <div class="version-note">v15 · 重制航务终端、第一部二十关、五个阶段巨兽与跨关构筑</div>
+    <div class="version-note">v16 · 五套关卡生态、差异化证据品、第一部二十关与阶段巨兽</div>
   </div>
 </div>
 
@@ -3528,20 +3528,37 @@ const sampleInnerMat=new THREE.MeshBasicMaterial({color:0xd8fff8,transparent:tru
 const sampleShardMat=new THREE.MeshStandardMaterial({color:0x58d7c2,emissive:0x174f48,emissiveIntensity:1.1,roughness:.22,metalness:.38,fog:false});
 const sampleHaloMat=new THREE.MeshBasicMaterial({color:0x7fffd4,transparent:true,opacity:.42,depthWrite:false,blending:THREE.AdditiveBlending,fog:false});
 keepRes(sampleCoreGeo,sampleInnerGeo,sampleShardGeo,sampleHaloGeo,sampleCoreMat,sampleInnerMat,sampleShardMat,sampleHaloMat);
+/* v16：每四关更换一次怪物生态与证据品谱系。无尽模式按波次循环五套视觉族谱。 */
+const STAGE_VISUAL_FAMILIES=[
+  {id:"ship",name:"大船航务层",monster:"船壳寄生体",pickup:"航务记忆信标",color:0x7fffd4,accent:0xd7fff5},
+  {id:"remora",name:"雷莫拉维护层",monster:"雷莫拉清道兽",pickup:"雷莫拉义务甲片",color:0xffb66d,accent:0xffe0a3},
+  {id:"alpha",name:"黑色阿尔法层",monster:"阿尔法缄默体",pickup:"黑色阿尔法密钥",color:0xe16cff,accent:0xffb0ff},
+  {id:"core",name:"中微子内核层",monster:"中微子畸变体",pickup:"中微子航迹线圈",color:0x67bfff,accent:0xd6f3ff},
+  {id:"marrow",name:"髓星接驳层",monster:"髓星裂隙兽",pickup:"髓星核心碎片",color:0xff617f,accent:0xffcf9f}
+];
+function stageVisualFamily(){const wave=G&&G.endless&&G.endless.wave,level=wave||((G&&G.level)||1),index=Math.floor((Math.max(1,level)-1)/4);return STAGE_VISUAL_FAMILIES[wave?index%5:Math.min(4,index)];}
+function stageVisualVariant(){const wave=G&&G.endless&&G.endless.wave,level=wave||((G&&G.level)||1);return (Math.max(1,level)-1)%4;}
+const STAGE_VARIANT_TAGS=["原型","强化","裂变","王冠"];
+const pickupPlateGeo=new THREE.BoxGeometry(.65,.12,.48),pickupAntennaGeo=new THREE.CylinderGeometry(.035,.06,.9,6),pickupRingGeo=new THREE.TorusGeometry(.42,.055,6,24),pickupKeyGeo=new THREE.TetrahedronGeometry(.42,0),pickupCoilGeo=new THREE.TorusKnotGeometry(.28,.055,36,6,2,3),pickupRockGeo=new THREE.DodecahedronGeometry(.43,1);
+keepRes(pickupPlateGeo,pickupAntennaGeo,pickupRingGeo,pickupKeyGeo,pickupCoilGeo,pickupRockGeo);
 let sampleMeshes = [];
 function buildSamples(spotsList){
   disposeRoots(sampleMeshes);
   sampleMeshes = [];
+  const family=stageVisualFamily(),familyIndex=STAGE_VISUAL_FAMILIES.indexOf(family),variant=stageVisualVariant();
   for(let i=0;i<spotsList.length;i++){
     const s = spotsList[i];
-    const root=new THREE.Group(),core=new THREE.Mesh(sampleCoreGeo,sampleCoreMat),inner=new THREE.Mesh(sampleInnerGeo,sampleInnerMat);
-    inner.rotation.set(.4,.7,.2);root.add(core,inner);
-    const shards=new THREE.InstancedMesh(sampleShardGeo,sampleShardMat,4),mat=new THREE.Matrix4(),q=new THREE.Quaternion(),e=new THREE.Euler(),p=new THREE.Vector3(),sc=new THREE.Vector3();
-    for(let c=0;c<4;c++){const a=c/4*Math.PI*2+i*.7;p.set(Math.cos(a)*.39,-.18,Math.sin(a)*.39);e.set((c%2?-.22:.22),a,(c-1.5)*.18);q.setFromEuler(e);sc.set(.82,.66+c*.11,.82);mat.compose(p,q,sc);shards.setMatrixAt(c,mat);}
-    shards.instanceMatrix.needsUpdate=true;root.add(shards);
-    const halo=new THREE.Mesh(sampleHaloGeo,sampleHaloMat);halo.rotation.x=Math.PI/2;halo.position.y=-.24;root.add(halo);
-    const glow=new THREE.Sprite(glowMaterial(0x7fffd4));glow.scale.set(2.15,2.15,1);glow.position.y=.04;root.add(glow);
-    root.userData={halo,core,inner,glow,phase:i*.83};
+    const root=new THREE.Group(),solid=new THREE.MeshStandardMaterial({color:family.color,emissive:family.color,emissiveIntensity:.42,roughness:.3,metalness:.55,fog:false}),light=new THREE.MeshBasicMaterial({color:family.accent,transparent:true,opacity:.78,depthWrite:false,fog:false}),haloMat=new THREE.MeshBasicMaterial({color:family.color,transparent:true,opacity:.48,depthWrite:false,blending:THREE.AdditiveBlending,fog:false});
+    let core,inner;
+    if(familyIndex===0){core=new THREE.Mesh(pickupPlateGeo,solid);inner=new THREE.Mesh(pickupAntennaGeo,light);inner.position.y=.48;const cap=new THREE.Mesh(sampleInnerGeo,light);cap.position.y=.9;root.add(core,inner,cap);}
+    else if(familyIndex===1){core=new THREE.Mesh(sampleCoreGeo,solid);core.scale.set(1.15,.38,1);inner=new THREE.Mesh(pickupRingGeo,light);inner.rotation.x=Math.PI/2;for(let c=0;c<3;c++){const plate=new THREE.Mesh(pickupPlateGeo,solid);plate.scale.set(.55,.7,.3);plate.position.set((c-1)*.34,-.34,(c%2-.5)*.25);plate.rotation.z=(c-1)*.28;root.add(plate);}root.add(core,inner);}
+    else if(familyIndex===2){core=new THREE.Mesh(pickupKeyGeo,solid);core.scale.set(.72,1.5,.72);inner=new THREE.Mesh(pickupRingGeo,light);inner.rotation.set(Math.PI/2,.3,.2);const spike=new THREE.Mesh(sampleShardGeo,light);spike.position.y=.62;root.add(core,inner,spike);}
+    else if(familyIndex===3){core=new THREE.Mesh(pickupCoilGeo,solid);inner=new THREE.Mesh(new THREE.SphereGeometry(.15,8,6),light);const ring2=new THREE.Mesh(pickupRingGeo,light);ring2.rotation.x=Math.PI/2;ring2.scale.set(1.25,1.25,1.25);root.add(core,inner,ring2);}
+    else{core=new THREE.Mesh(pickupRockGeo,solid);core.scale.set(.9,1.25,.9);inner=new THREE.Mesh(sampleInnerGeo,light);for(let c=0;c<5;c++){const shard=new THREE.Mesh(sampleShardGeo,solid),a=c/5*Math.PI*2;shard.position.set(Math.cos(a)*.4,-.25,Math.sin(a)*.4);shard.rotation.z=(c-2)*.2;root.add(shard);}root.add(core,inner);}
+    for(let c=0;c<variant;c++){const satellite=new THREE.Mesh(c%2?VARIANT_GEO.node:sampleShardGeo,c%2?light:solid),a=c/Math.max(1,variant)*Math.PI*2+i*.4;satellite.position.set(Math.cos(a)*(.58+c*.08),-.04+c*.2,Math.sin(a)*(.58+c*.08));satellite.scale.setScalar(.58+c*.12);root.add(satellite);}
+    const halo=new THREE.Mesh(sampleHaloGeo,haloMat);halo.rotation.x=Math.PI/2;halo.position.y=-.34;halo.scale.setScalar(1+variant*.1);root.add(halo);
+    const glow=new THREE.Sprite(glowMaterial(family.color));glow.scale.set(2.15,2.15,1);glow.position.y=.04;root.add(glow);
+    root.userData={halo,core,inner,glow,coreBaseScale:core.scale.clone(),phase:i*.83,pickupKind:family.id+"-"+(variant+1),pickupName:family.pickup+"·"+STAGE_VARIANT_TAGS[variant],color:family.color,visualVariant:variant};
     root.position.set(s.x,terrainHeight(s.x,s.z)+1.2,s.z);scene.add(root);sampleMeshes.push(root);
   }
 }
@@ -3704,12 +3721,25 @@ function buildSpitterMesh(){
   g.userData = { type:"spitter", bodyMat, eyeMat, sac, tentacles, mouth, ridges, membranes:[membraneL,membraneR] };
   return g;
 }
-function buildMonsterMesh(type){
+const VARIANT_GEO={plate:new THREE.BoxGeometry(.46,.12,.6),fin:new THREE.ConeGeometry(.3,.9,4),crystal:new THREE.OctahedronGeometry(.3,0),coil:new THREE.TorusGeometry(.48,.06,6,18),tendril:new THREE.ConeGeometry(.08,.85,6),node:new THREE.SphereGeometry(.1,7,5)};
+keepRes(...Object.values(VARIANT_GEO));
+function decorateMonsterFamily(g,family,type,variant){
+  variant=variant||0;const fi=Math.max(0,STAGE_VISUAL_FAMILIES.indexOf(family)),mat=new THREE.MeshStandardMaterial({color:family.color,emissive:family.color,emissiveIntensity:.3+variant*.1,roughness:.42,metalness:fi===1?.18:.55,fog:false}),glow=new THREE.MeshBasicMaterial({color:family.accent,fog:false}),parts=[];
+  if(fi===0){for(const side of [-1,1]){const plate=new THREE.Mesh(VARIANT_GEO.plate,mat);plate.position.set(side*.52,.34,-.08);plate.rotation.z=side*.32;g.add(plate);parts.push(plate);}const node=new THREE.Mesh(VARIANT_GEO.node,glow);node.position.set(0,.7,0);g.add(node);parts.push(node);}
+  else if(fi===1){for(const side of [-1,1]){const fin=new THREE.Mesh(VARIANT_GEO.fin,mat);fin.position.set(side*.64,.08,-.15);fin.rotation.z=side*-Math.PI/2;g.add(fin);parts.push(fin);}for(let j=0;j<3;j++){const barb=new THREE.Mesh(VARIANT_GEO.fin,mat);barb.scale.set(.42,.55,.42);barb.position.set(0,.5,-.34+j*.32);g.add(barb);parts.push(barb);}}
+  else if(fi===2){for(let j=0;j<5;j++){const crystal=new THREE.Mesh(VARIANT_GEO.crystal,mat),a=j/5*Math.PI*2;crystal.scale.set(.55,1.15,.55);crystal.position.set(Math.cos(a)*.52,.28+Math.sin(j)*.15,Math.sin(a)*.52);crystal.rotation.z=(j-2)*.22;g.add(crystal);parts.push(crystal);}}
+  else if(fi===3){for(let j=0;j<2;j++){const coil=new THREE.Mesh(VARIANT_GEO.coil,mat);coil.rotation.set(Math.PI/2,j*Math.PI/2,0);coil.scale.setScalar(1+j*.2);g.add(coil);parts.push(coil);}for(const x of [-.36,.36]){const node=new THREE.Mesh(VARIANT_GEO.node,glow);node.position.set(x,.54,.26);g.add(node);parts.push(node);}}
+  else{for(let j=0;j<6;j++){const t=new THREE.Mesh(VARIANT_GEO.tendril,mat),a=j/6*Math.PI*2;t.position.set(Math.cos(a)*.48,-.38,Math.sin(a)*.48);t.rotation.z=Math.cos(a)*.72;t.rotation.x=Math.sin(a)*.72;g.add(t);parts.push(t);}const node=new THREE.Mesh(VARIANT_GEO.node,glow);node.scale.setScalar(1.55);node.position.set(0,.54,.34);g.add(node);parts.push(node);}
+  if(variant===3){const crown=new THREE.Mesh(VARIANT_GEO.coil,glow);crown.scale.set(.72,.72,.72);crown.rotation.x=Math.PI/2;crown.position.y=.82;g.add(crown);parts.push(crown);}parts.forEach((p,pi)=>{p.scale.multiplyScalar(1+variant*.08);if(variant===2)p.rotation.y+=(pi%2?-.22:.22);});
+  g.userData=g.userData||{};g.userData.visualFamily=family.id;g.userData.visualVariant=family.id+"-"+(variant+1);g.userData.familyName=family.monster+"·"+STAGE_VARIANT_TAGS[variant];g.userData.variantParts=parts;g.userData.variantMaterial=mat;g.userData.variantGlow=glow;return g;
+}
+function buildMonsterMesh(type,family){
   let g;
   if(type === "dart") g=buildDartMesh();
   else if(type === "spitter") g=buildSpitterMesh();
   else if(type === "elite"){ g=buildHandGroup(1.4);g.userData=g.userData||{};addCrystals(g); }
   else g=buildHandGroup(1);
+  decorateMonsterFamily(g,family||stageVisualFamily(),type,stageVisualVariant());
   return stylizeCreature(g,type,false);
 }
 const wardAuraGeo=new THREE.SphereGeometry(1.35,12,8);
@@ -3719,8 +3749,10 @@ let monsterMeshes = [];
 function buildMonsters(monsters){
   disposeRoots(monsterMeshes);
   monsterMeshes = [];
+  const family=stageVisualFamily();
   for(const cfg of monsters){
-    const mesh = buildMonsterMesh(cfg.type);
+    const mesh = buildMonsterMesh(cfg.type,family);
+    cfg.visualFamily=family.id;cfg.visualVariant=family.id+"-"+(stageVisualVariant()+1);cfg.familyName=family.monster+"·"+STAGE_VARIANT_TAGS[stageVisualVariant()];
     mesh.userData.baseScale=cfg.type==="elite"?1.4:1;
     const aura=new THREE.Mesh(wardAuraGeo,wardAuraMat);aura.visible=false;mesh.add(aura);mesh.userData.wardAura=aura;
     /* v9：stylizeCreature 已按体量限制投影网格，避免高模小部件把 draw call 推爆。 */
@@ -3922,7 +3954,7 @@ function drawMinimap(ts,force){
   ctx.clearRect(0,0,w,h);ctx.drawImage(minimapLayer,0,0);
   ctx.save();ctx.beginPath();ctx.rect(13,13,w-26,h-26);ctx.clip();
   const sweep=t*.42-Math.PI*.5,sg=ctx.createLinearGradient(w*.5,h*.5,w*.5+Math.cos(sweep)*w*.5,h*.5+Math.sin(sweep)*h*.5);sg.addColorStop(0,"rgba(95,224,176,.13)");sg.addColorStop(1,"rgba(95,224,176,0)");ctx.strokeStyle=sg;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(w*.5,h*.5);ctx.lineTo(w*.5+Math.cos(sweep)*w,h*.5+Math.sin(sweep)*h);ctx.stroke();
-  const spots=G.sampleSpots||SAMPLE_SPOTS;for(let i=0;i<spots.length;i++){if(G.grabbed&&G.grabbed[i])continue;const p=minimapPoint(spots[i].x,spots[i].z);minimapDiamond(ctx,p.x,p.y,3.2,"#78caff","rgba(220,249,255,.8)");}
+  const spots=G.sampleSpots||SAMPLE_SPOTS,family=stageVisualFamily(),familyColor="#"+family.color.toString(16).padStart(6,"0"),familyAccent="#"+family.accent.toString(16).padStart(6,"0");for(let i=0;i<spots.length;i++){if(G.grabbed&&G.grabbed[i])continue;const p=minimapPoint(spots[i].x,spots[i].z);minimapDiamond(ctx,p.x,p.y,3.2,familyColor,familyAccent);}
   const mission=G.objective||{};if(mission.kind==="scan"){for(let i=0;i<(mission.points||[]).length;i++){const q=mission.points[i],p=minimapPoint(q.x,q.z),done=!!(G.scanDone&&G.scanDone[i]);ctx.strokeStyle=done?"#63e8cf":"#ffd66b";ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);ctx.stroke();ctx.fillStyle=done?"#63e8cf":"#ffd66b";ctx.fillRect(p.x-1,p.y-1,2,2);}}else if(mission.kind==="defend"){const p=minimapPoint(mission.x,mission.z),r=mission.r/(MAP_LIMIT*2)*(w-26);ctx.strokeStyle="#63e8cf";ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.stroke();}
   for(const m of G.monsters||[]){if(!m||m.hp<=0)continue;const p=minimapPoint(m.x,m.z),elite=m.type==="elite",spitter=m.type==="spitter";ctx.beginPath();ctx.arc(p.x,p.y,elite?5:3.5,0,Math.PI*2);ctx.fillStyle=elite?"#ffb14f":spitter?"#c875ff":"#ff7187";ctx.fill();if(m.atk&&m.atk.phase==="windup"){ctx.strokeStyle="rgba(255,80,100,"+(.35+.5*pulse)+")";ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,7+pulse*3,0,Math.PI*2);ctx.stroke();}}
   if(G.boss&&G.boss.hp>0){const p=minimapPoint(G.boss.x,G.boss.z),active=baseObjectiveMet();minimapDiamond(ctx,p.x,p.y,7+pulse*2,active?"#ff315d":"#6e3948",active?"#ffd3dc":"#b68b96");ctx.font="bold 9px serif";ctx.textAlign="center";ctx.fillStyle=active?"#ffd3dc":"#ad9199";ctx.fillText(active?"BOSS":"封锁",p.x,p.y-11);}
@@ -4740,10 +4772,12 @@ function tryPickup(){
     sampleMeshes[idx].visible = false;
     const s = (G.sampleSpots || SAMPLE_SPOTS)[idx];
     const y = terrainHeight(s.x, s.z)+1.2;
-    burstParticle(s.x, y, s.z, 0x7fffd4, 12);
+    const pickup=sampleMeshes[idx]&&sampleMeshes[idx].userData||{},pickupName=pickup.pickupName||"现场证据";
+    burstParticle(s.x, y, s.z, pickup.color||0x7fffd4, 12);
     spawnParticleMeshes();
     sound("pickup");
     vibrate(20);        // UX §5：拾取触觉（可关闭）
+    toast(pickupName+" 已回收");
     maybeStoryPickup();
     saveGame();         // S5：进度写入（刷新可续）
     if(baseObjectiveMet()&&G.boss&&G.boss.hp>0) toast((BOSS_NAMES[G.boss.type]||"核心守卫")+" 协议已激活！");
@@ -5067,6 +5101,11 @@ function loop(ts){
         ud.crystals.forEach((c, ci) => { c.rotation.y += dt*(0.8+ci*0.25); });
         if(ud.core) ud.core.scale.setScalar(1 + 0.25*Math.sin(animT*1.5));
       }
+      if(ud.variantParts){
+        if(ud.visualFamily==="alpha")ud.variantParts.forEach((p,pi)=>p.rotation.y+=dt*(.45+pi*.08));
+        else if(ud.visualFamily==="core")ud.variantParts.forEach((p,pi)=>{if(p.geometry===VARIANT_GEO.coil)p.rotation.z+=dt*(pi?-.7:.7);});
+        else if(ud.visualFamily==="marrow")ud.variantParts.forEach((p,pi)=>{if(p.geometry===VARIANT_GEO.tendril)p.rotation.y=Math.sin(animT*.55+pi)*.28;});
+      }
     }
     // 同步脉冲网格
     for(const p of pulses){ if(p.mesh) p.mesh.position.set(p.x,p.y,p.z); }
@@ -5095,7 +5134,7 @@ function loop(ts){
         m.userData.halo.scale.setScalar(lowOxy?1.06+.12*Math.abs(Math.sin(G.time*5+i)):1+.05*Math.sin(G.time*2+i));
       }
       const k=lowOxy?.72+.28*Math.abs(Math.sin(G.time*6+i)):1+.06*Math.sin(G.time*2+i);
-      if(m.userData.core)m.userData.core.scale.setScalar(k);
+      if(m.userData.core){const bs=m.userData.coreBaseScale;m.userData.core.scale.copy(bs||new THREE.Vector3(1,1,1)).multiplyScalar(k);}
       if(m.userData.inner)m.userData.inner.rotation.x+=dt*(lowOxy?2.2:1.1);
       if(m.userData.glow)m.userData.glow.scale.setScalar((lowOxy?2.38:2.08)*(.92+.08*k));
     }
@@ -5267,7 +5306,7 @@ function loop(ts){
       }
       if(near>=0 && !G.winOpen){
         if(input.isTouch){ btnPickup.classList.add("show"); ie.classList.remove("show"); }
-        else { ie.textContent = "E · 回收星髓残片"; ie.classList.add("show"); }
+        else { const data=sampleMeshes[near]&&sampleMeshes[near].userData;ie.textContent = "E · 回收"+(data&&data.pickupName||"现场证据"); ie.classList.add("show"); }
       } else {
         ie.classList.remove("show");
         btnPickup.classList.remove("show");
@@ -5361,6 +5400,7 @@ globalThis.__D3D = {
     projectiles:pulses.length, projectileMeshes:(()=>{let n=0;scene.traverse(o=>{if(o.userData&&o.userData.playerProjectile)n++;});return n;})(),
     monsters:G&&G.monsters?G.monsters.filter(m=>m.hp>0).length:0,baseObjectiveMet:G?baseObjectiveMet():false,objectiveKind:G&&G.objective?G.objective.kind:null,objectiveT:G&&G.objective?G.objective.t||0:0,
     scanDone:G&&G.scanDone?G.scanDone.filter(Boolean).length:0,defendProgress:G?(G.defendProgress||0):0,gauntletWave:G?(G.gauntletWave||0):0,missionMarkers:missionMarkers.length,
+    visualFamily:G?stageVisualFamily().id:null,visualVariant:G?(stageVisualFamily().id+"-"+(stageVisualVariant()+1)):null,pickupKinds:[...new Set(sampleMeshes.map(m=>m.userData&&m.userData.pickupKind).filter(Boolean))],monsterFamilies:[...new Set(monsterMeshes.map(m=>m.userData&&m.userData.visualFamily).filter(Boolean))],monsterVariants:[...new Set(monsterMeshes.map(m=>m.userData&&m.userData.visualVariant).filter(Boolean))],
     loot:lootDrops.length, dashCool:G?(G.dashCool||0):0, shield:G?(G.shield||0):0, overdrive:G?(G.overdrive||0):0,
     moveMul:G?(G.moveMul||1):1,damageMul:G?(G.damageMul||1):1,weaponCoolMul:G?(G.weaponCoolMul||1):1,scoreMul:G?(G.scoreMul||1):1,
     enemyHazards:G&&G.enemyHazards?G.enemyHazards.length:0, slow:G?(G.slow||0):0, bleed:G?(G.bleed||0):0,
