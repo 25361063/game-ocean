@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>潮声之下 · 第一部二十关 v17</title>
+<title>潮声之下 · 第一部二十关 v18</title>
 <style>
   :root{--bg:#04070c;--ink:#cfe9df;--dim:#5e736c;--acc:#5fe0b0;--acc2:#7fffd4;--blood:#e0506a;--gold:#d9c08a;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -345,7 +345,7 @@
 <b>处决</b>：持续攻击削减韧性，破韧后贴近并按攻击键处决。证据信标可以恢复氧气、生命和瓷骨弹药；每关开始氧气自动补满。
     </div></details>
     <div class="hint">点击画面锁定鼠标（Esc 释放并暂停）· 引擎已本地化，离线可玩 · 若在内嵌预览中操作受限，请在新标签页打开</div>
-    <div class="version-note">v17 · 战术模式选择、五套关卡生态、第一部二十关与阶段巨兽</div>
+    <div class="version-note">v18 · 二十关完整通关校验、防守目标锁定与终章结算修复</div>
   </div>
 </div>
 
@@ -2149,7 +2149,7 @@ function baseObjectiveMet(){
   if(obj.kind === "survive") return G.time >= obj.t && G.oxygen > 0;
   if(obj.kind === "scan") return (G.scanDone||[]).filter(Boolean).length >= (obj.points||[]).length;
   if(obj.kind === "hybrid") return G.samples>=obj.n&&(G.kills||0)>=obj.kills;
-  if(obj.kind === "defend") return (G.defendProgress||0)>=obj.t;
+  if(obj.kind === "defend") return !!G.defendComplete||(G.defendProgress||0)>=obj.t;
   if(obj.kind === "gauntlet") return (G.gauntletWave||1)>=obj.waves&&(G.monsters||[]).every(m=>m.hp<=0);
   return G.samples>=sampleTarget();
 }
@@ -4268,7 +4268,7 @@ function spawnGauntletWave(wave){const count=4+wave*2,types=ENDLESS_TYPES.slice(
 function tickCampaignObjective(dt){
   if(!G||G.modeId!=="campaign"||!G.objective)return;const obj=G.objective;
   if(obj.kind==="scan"){G.scanDone=G.scanDone||[];G.scanHold=G.scanHold||[];for(let i=0;i<(obj.points||[]).length;i++){if(G.scanDone[i])continue;const p=obj.points[i],inside=Math.hypot(player.x-p.x,player.z-p.z)<3;G.scanHold[i]=Math.max(0,(G.scanHold[i]||0)+(inside?dt:-dt*.7));if(G.scanHold[i]>=obj.hold){G.scanDone[i]=true;G.score+=45;toast("扫描节点 "+(i+1)+"/"+obj.points.length+" 完成");sound("pickup");}break;}}
-  else if(obj.kind==="defend"){const inside=Math.hypot(player.x-obj.x,player.z-obj.z)<obj.r;G.defendProgress=Math.max(0,Math.min(obj.t,(G.defendProgress||0)+(inside?dt:-dt*.35)));if(inside&&Math.floor(G.defendProgress||0)>Math.floor((G.defendLast||0)/5)*5){G.defendLast=G.defendProgress;}}
+  else if(obj.kind==="defend"&&!G.defendComplete){const inside=Math.hypot(player.x-obj.x,player.z-obj.z)<obj.r;G.defendProgress=Math.max(0,Math.min(obj.t,(G.defendProgress||0)+(inside?dt:-dt*.35)));if(G.defendProgress>=obj.t){G.defendComplete=true;G.defendProgress=obj.t;G.score+=80;toast("中继防守完成 · 舱门坐标已解锁");sound("pickup");}if(inside&&Math.floor(G.defendProgress||0)>Math.floor((G.defendLast||0)/5)*5){G.defendLast=G.defendProgress;}}
   else if(obj.kind==="gauntlet"){G.gauntletWave=G.gauntletWave||1;if((G.monsters||[]).every(m=>m.hp<=0)&&G.gauntletWave<obj.waves){G.gauntletWave++;spawnGauntletWave(G.gauntletWave);}}
   for(const m of missionMarkers){m.rotation.z+=dt*.22;if(m.userData.kind==="scan"){const done=!!(G.scanDone&&G.scanDone[m.userData.index]);m.material.color.setHex(done?0x63e8cf:0xffd66b);m.material.opacity=done?.22:.48;}else{const pulse=1+.025*Math.sin(G.time*4);m.scale.setScalar(pulse);}}
 }
@@ -4768,7 +4768,7 @@ function updateObjectiveUI(){
   } else if(obj.kind === "hybrid"){
     complete=G.samples>=obj.n&&(G.kills||0)>=obj.kills;text=complete?"调查与清场完成 · 前往下行舱门":"双重任务 · 证据 "+G.samples+"/"+obj.n+" · 击杀 "+(G.kills||0)+"/"+obj.kills;
   } else if(obj.kind === "defend"){
-    complete=(G.defendProgress||0)>=obj.t;text=complete?"中继防守完成 · 前往下行舱门":"守住青色中继区 · "+Math.floor(G.defendProgress||0)+"/"+obj.t+" 秒";
+    complete=!!G.defendComplete||(G.defendProgress||0)>=obj.t;text=complete?"中继防守完成 · 前往下行舱门":"守住青色中继区 · "+Math.floor(G.defendProgress||0)+"/"+obj.t+" 秒";
   } else if(obj.kind === "gauntlet"){
     const wave=G.gauntletWave||1,alive=(G.monsters||[]).filter(m=>m.hp>0).length;complete=wave>=obj.waves&&alive===0;text=complete?"三波增援已清除 · 前往下行舱门":"增援战 "+wave+"/"+obj.waves+" · 剩余 "+alive;
   } else if(obj.kind === "gate"){
@@ -4833,6 +4833,7 @@ function fmtTime(t){
   return m + ":" + String(s).padStart(2, "0");
 }
 function setOver(win){
+  G.state=S.OVER;input.setEnabled(false);
   const recordLevel=G.runStartLevel===undefined?runSelection.level:G.runStartLevel,key=runRecordKey(G.modeId||runSelection.modeId,recordLevel);hi=readRunRecord(G.modeId||runSelection.modeId,recordLevel);
   const isNew=G.score>hi;
   if(isNew){hi=G.score;try{if(storage)storage.setItem(key,String(hi));}catch(e){}}
@@ -5417,7 +5418,7 @@ globalThis.__D3D = {
     moveMul:G?(G.moveMul||1):1,damageMul:G?(G.damageMul||1):1,weaponCoolMul:G?(G.weaponCoolMul||1):1,scoreMul:G?(G.scoreMul||1):1,
     enemyHazards:G&&G.enemyHazards?G.enemyHazards.length:0, slow:G?(G.slow||0):0, bleed:G?(G.bleed||0):0,
     boss:G&&G.boss?{type:G.boss.type,hp:G.boss.hp,maxHp:G.boss.maxHp}:null,endless:G&&G.endless?{wave:G.endless.wave,cleared:G.endless.cleared,damageMul:G.endless.damageMul,bossWave:G.endless.bossWave,totalWaves:G.endless.totalWaves}:null,pos:{x:player.x,z:player.z},hi,
-    story:{order:storyRun.order,echo:storyRun.echo,choices:Object.assign({},storyRun.choices),ending:storyRun.ending,modal:storyModalActive,page:storyPageIndex,options:(storyPages[storyPageIndex]?.choices||[]).map(c=>c.value)} }),
+    story:{order:storyRun.order,echo:storyRun.echo,choices:Object.assign({},storyRun.choices),ending:(G&&G.storyEnding)||storyRun.ending,modal:storyModalActive,page:storyPageIndex,options:(storyPages[storyPageIndex]?.choices||[]).map(c=>c.value)} }),
   setPos: (x,z)=>{ player.x=x; player.z=z; },
   /* CSD-H2：怪物强化运行时降档入口（1|2|3，写 G.boost；无需重新构建） */
   setMonsterBoost: (v)=>setMonsterBoost(v),
@@ -5448,7 +5449,7 @@ globalThis.__D3D = {
   qaPickup:qaEnabled?(i)=>{if(G&&G.sampleSpots&&G.sampleSpots[i|0]){const p=G.sampleSpots[i|0];player.x=p.x;player.z=p.z;player.y=terrainHeight(p.x,p.z)+1.7;tryPickup();}return globalThis.__D3D.get();}:undefined,
   qaFaceBoss:qaEnabled?()=>{if(G&&G.boss){player.x=G.boss.x;player.z=G.boss.z+11;player.y=terrainHeight(player.x,player.z)+1.7;player.yaw=0;player.pitch=0;camera.position.set(player.x,player.y,player.z);camera.rotation.set(0,0,0);}return globalThis.__D3D.get();}:undefined,
   qaShowBoss:qaEnabled?()=>{if(G&&G.boss&&bossMesh){clearTelegraphRings();bossRing.visible=false;gateGroup.visible=false;gateBeam.visible=false;G.enemyHazards=[];G.boss.phaseLock=999;G.boss.atk=null;G.boss.feint=null;G.boss.warn=false;bossMesh.visible=true;const d=bossMesh.userData||{};bossMesh.scale.setScalar(d.baseScale||1);bossMesh.position.set(G.boss.x,terrainHeight(G.boss.x,G.boss.z)+(d.hover||2.4),G.boss.z);document.getElementById("levelIntro").classList.remove("show");}return globalThis.__D3D.get();}:undefined,
-  qaCompleteLevel:qaEnabled?()=>{if(G){G.samples=sampleTarget();G.kills=999;if(G.objective&&G.objective.t){G.time=Math.max(G.time,G.objective.t);G.defendProgress=G.objective.t;}if(G.objective?.kind==="scan")G.scanDone=(G.objective.points||[]).map(()=>true);if(G.objective?.kind==="gauntlet")G.gauntletWave=G.objective.waves;for(const m of G.monsters||[])m.hp=0;if(G.boss)G.boss.hp=0;G.winOpen=true;const p=gatePos();player.x=p.x;player.z=p.z;player.y=terrainHeight(p.x,p.z)+1.7;G.state=S.PLAYING;}return globalThis.__D3D.get();}:undefined,
+  qaCompleteLevel:qaEnabled?()=>{if(G){G.samples=sampleTarget();G.kills=999;if(G.objective&&G.objective.t){G.time=Math.max(G.time,G.objective.t);G.defendProgress=G.objective.t;if(G.objective.kind==="defend")G.defendComplete=true;}if(G.objective?.kind==="scan")G.scanDone=(G.objective.points||[]).map(()=>true);if(G.objective?.kind==="gauntlet")G.gauntletWave=G.objective.waves;for(const m of G.monsters||[])m.hp=0;if(G.boss)G.boss.hp=0;G.winOpen=true;const p=gatePos();player.x=p.x;player.z=p.z;player.y=terrainHeight(p.x,p.z)+1.7;G.state=S.PLAYING;}return globalThis.__D3D.get();}:undefined,
   qaSetPos:qaEnabled?(x,z)=>{player.x=Number(x)||0;player.z=Number(z)||0;player.y=terrainHeight(player.x,player.z)+1.7;camera.position.set(player.x,player.y,player.z);return globalThis.__D3D.get();}:undefined,
   qaMissionTick:qaEnabled?(dt)=>{tickCampaignObjective(Math.max(0,Number(dt)||0));return globalThis.__D3D.get();}:undefined,
   qaClearMissionWave:qaEnabled?()=>{if(G&&G.objective?.kind==="gauntlet"){for(const m of G.monsters||[])m.hp=0;tickCampaignObjective(.016);}return globalThis.__D3D.get();}:undefined,
