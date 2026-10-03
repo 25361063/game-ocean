@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>潮声之下 · 联机诊断</title>
+<style>body{font:16px/1.7 system-ui;background:#071923;color:#daf3ec;max-width:800px;margin:30px auto;padding:20px}button,a{color:#8cf4d4}button{background:#183640;border:1px solid #8cf4d4;padding:10px;cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#112b35;padding:18px}</style>
+<h1>联机诊断</h1><p>请两台设备分别在本页测试。通过表示当前设备能够加入服务器房间，不代表另一台设备也已连接。</p>
+<button id="test">重新测试</button> <a href="/">返回游戏</a>
+<pre id="result" role="status" aria-live="polite"></pre>
+<p>若另一台设备连本页都打不开，请核对主机窗口显示的地址、端口和防火墙。两人必须打开同一台服务器的网页。</p>
+<script>
+let running=false;
+async function run(){
+  if(running)return;running=true;document.querySelector('#test').disabled=true;
+  const out=document.querySelector('#result');out.textContent='当前地址：'+location.href+'\n';
+  const write=s=>{out.textContent+=s+'\n';};
+  const abort=new AbortController(),timeout=setTimeout(()=>abort.abort(),6000);
+  try{
+    const res=await fetch('/health',{cache:'no-store',signal:abort.signal});
+    if(!res.ok)throw new Error('HTTP '+res.status+'，请更新/重启服务器');
+    const data=await res.json();
+    if(data.service!=='tide-coop'||data.protocol!==2)throw new Error('不是兼容的联机服务器');
+    write('✓ HTTP 通过，服务器 '+data.version);
+    await new Promise((resolve,reject)=>{
+      const ws=new WebSocket((location.protocol==='https:'?'wss:':'ws:')+'//'+location.host+'/ws');
+      let done=false;
+      const finish=err=>{if(done)return;done=true;clearTimeout(timer);ws.close();err?reject(err):resolve();};
+      const timer=setTimeout(()=>finish(new Error('WebSocket 或房间回执超时')),10000);
+      ws.onopen=()=>{write('✓ WebSocket 握手通过');ws.send(JSON.stringify({t:'join',room:'DIAG-'+Date.now()+'-'+Math.random().toString(36).slice(2)}));};
+      ws.onmessage=e=>{
+        try{
+          const m=JSON.parse(e.data);
+          if(m.t==='error')finish(new Error(m.message));
+          if(m.t==='joined'){write('✓ 房间加入成功');ws.send(JSON.stringify({t:'ping'}));}
+          if(m.t==='pong'){write('✓ 双向心跳通过');finish();}
+        }catch(err){finish(err);}
+      };
+      ws.onclose=e=>{if(!done)finish(new Error('WebSocket 关闭码 '+e.code));};
+      ws.onerror=()=>finish(new Error('HTTP 可用，但 WebSocket 无法建立'));
+    });
+    write('连接测试全部通过。返回游戏，创建或加入相同房间号。');
+  }catch(e){write('✗ '+e.message+'。请把这段诊断结果和主机的 联机运行.log 一起保留。');}
+  finally{clearTimeout(timeout);running=false;document.querySelector('#test').disabled=false;}
+}
+document.querySelector('#test').addEventListener('click',run);run();
+</script></html>

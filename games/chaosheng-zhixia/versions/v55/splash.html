@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+<title>潮声之下</title>
+<style>
+  :root{--bg:#04070c;--ink:#cfe9df;--dim:#5e736c;--acc:#5fe0b0;--acc2:#7fffd4;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;overflow:hidden;}
+  body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","Songti SC",system-ui,sans-serif;
+    user-select:none;position:relative;}
+  /* 背景美术：由 scripts/sync-game.mjs 从「开始界面_v48.png」裁切生成 splash/art.png */
+  .art{position:absolute;inset:0;background-image:url("art.png");background-size:cover;background-position:50% 18%;
+    opacity:.5;filter:saturate(.85);}
+  .veil{position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 8%, rgba(95,224,176,.10), transparent 60%),
+      linear-gradient(180deg, rgba(4,7,12,.55) 0%, rgba(4,7,12,.86) 58%, #04070c 100%);}
+  .grain{position:absolute;inset:0;opacity:.16;
+    background-image:repeating-linear-gradient(180deg, rgba(127,255,212,.09) 0 1px, transparent 1px 3px);
+    animation:scan 8s linear infinite;}
+  @keyframes scan{from{background-position-y:0}to{background-position-y:120px}}
+  .inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:20px 26px 18px;}
+  .brand{display:flex;align-items:baseline;gap:10px;}
+  .brand b{font-family:"Songti SC","STSong",Georgia,serif;font-size:30px;letter-spacing:.22em;font-weight:600;
+    text-shadow:0 0 22px rgba(127,255,212,.28);}
+  .brand span{font-size:11px;letter-spacing:.28em;color:var(--acc);}
+  .en{margin-top:6px;font-size:10px;letter-spacing:.34em;color:var(--dim);text-transform:uppercase;}
+  .bar{margin-top:16px;height:3px;background:#0b1219;border:1px solid #16262f;border-radius:3px;overflow:hidden;}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2f8f74,var(--acc2));
+    animation:fill 1.9s cubic-bezier(.25,.9,.25,1) infinite;}
+  @keyframes fill{0%{width:6%}55%{width:72%}100%{width:100%}}
+  .hint{margin-top:9px;display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);letter-spacing:.06em;}
+  .hint em{font-style:normal;color:var(--acc);}
+</style>
+</head>
+<body>
+  <div class="art"></div>
+  <div class="veil"></div>
+  <div class="grain"></div>
+  <div class="inner">
+    <div class="brand"><b>潮声之下</b><span>桌面版</span></div>
+    <div class="en">The Great Ship · Deep Dive</div>
+    <div class="bar"><i></i></div>
+    <div class="hint"><span>正在启动内置服务器…</span><em>无需安装浏览器 / Python</em></div>
+  </div>
+</body>
+</html>

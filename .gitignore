@@ -1,0 +1,31 @@
+# 依赖与构建产物
+node_modules/
+**/node_modules/
+.venv/
+venv/
+.toolchain/
+dist/
+build/
+__pycache__/
+*.py[cod]
+package-lock.json
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.workbuddy/
+
+# 缓存与临时目录
+.cache_*/
+_vit49_*/
+_diag/*.log
+*.log
+
+# 版权素材（不随仓库分发）
+*.epub
+
+# 归档 / 本地暂存
+_archive/
+_archive-backup/

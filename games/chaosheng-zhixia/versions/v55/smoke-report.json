@@ -1,0 +1,264 @@
+{
+  "generatedAt": "2026-09-16T10:12:40.824Z",
+  "electron": "33.4.11",
+  "chrome": "130.0.6723.191",
+  "node": "20.18.3",
+  "mode": "local",
+  "server": {
+    "url": "http://127.0.0.1:8123/",
+    "port": 8123,
+    "lanBound": true,
+    "lan": [
+      {
+        "iface": "VMware Network Adapter VMnet1",
+        "address": "192.168.18.1",
+        "url": "http://192.168.18.1:8123/"
+      },
+      {
+        "iface": "VMware Network Adapter VMnet8",
+        "address": "192.168.199.1",
+        "url": "http://192.168.199.1:8123/"
+      },
+      {
+        "iface": "WLAN",
+        "address": "172.29.83.76",
+        "url": "http://172.29.83.76:8123/"
+      }
+    ]
+  },
+  "page": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 潮声之下/1.0.0 Chrome/130.0.6723.191 Electron/33.4.11 Safari/537.36",
+    "protocol": "http:",
+    "host": "127.0.0.1:8123",
+    "href": "http://127.0.0.1:8123/?v=1789553543040",
+    "title": "潮声之下 · 深渊遗物航路 v28",
+    "readyState": "complete",
+    "desktopBridge": "object",
+    "hasLogicModule": true,
+    "hasGameExport": true,
+    "runtimeErrors": [],
+    "scriptSrcCount": 8,
+    "canvases": [
+      {
+        "w": 1707,
+        "h": 970,
+        "id": "game"
+      },
+      {
+        "w": 1707,
+        "h": 970,
+        "id": "bloomLayer"
+      },
+      {
+        "w": 320,
+        "h": 320,
+        "id": "minimap"
+      }
+    ],
+    "loadOverlay": {
+      "visible": false,
+      "title": "正在加载 3D 引擎…",
+      "message": "正在载入 Vitruvian 人物与贴图…"
+    },
+    "webgl": {
+      "ok": true,
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "maxTextureSize": 8192,
+      "contextLost": false
+    },
+    "audio": {
+      "AudioContext": "function",
+      "state": "running"
+    },
+    "storage": {
+      "ok": true,
+      "keys": 2
+    },
+    "fetchedAssets": [
+      {
+        "name": "assets/vitruvian/GLTFLoader.js",
+        "ms": 6,
+        "size": 103611
+      },
+      {
+        "name": "assets/vitruvian/packed49.js",
+        "ms": 281,
+        "size": 52193147
+      },
+      {
+        "name": "assets/environment/architecture50.js",
+        "ms": 7,
+        "size": 9923
+      },
+      {
+        "name": "assets/vitruvian/cyber52.js",
+        "ms": 7,
+        "size": 6582
+      },
+      {
+        "name": "assets/vitruvian/wardrobe49.js",
+        "ms": 7,
+        "size": 5481
+      },
+      {
+        "name": "assets/environment/ecology51.js",
+        "ms": 7,
+        "size": 8812
+      },
+      {
+        "name": "assets/environment/tower54.js",
+        "ms": 9,
+        "size": 8773
+      },
+      {
+        "name": "assets/vitruvian/characters49.js",
+        "ms": 9,
+        "size": 6252
+      },
+      {
+        "name": "assets/posters/captains-v48.png",
+        "ms": 1005,
+        "size": 2525745
+      }
+    ]
+  },
+  "interactions": {
+    "intro": {
+      "cleared": true,
+      "finalState": {
+        "modal": false,
+        "echo": 0
+      }
+    },
+    "keyboard": {
+      "key": "M",
+      "minimapBefore": false,
+      "minimapAfter": true,
+      "minimapRestored": false,
+      "trustedEvents": {
+        "pointerdown": 0,
+        "click": 0,
+        "keydown": 2,
+        "onTarget": 0,
+        "onTargetLabel": null,
+        "lastTarget": null,
+        "lastClient": null
+      },
+      "trustedKeysDelivered": true,
+      "gameReacted": true,
+      "ok": true
+    },
+    "mouseCalibration": {
+      "sentAt": {
+        "x": 854,
+        "y": 485
+      },
+      "receivedAt": {
+        "x": 854,
+        "y": 485
+      },
+      "frameOffset": {
+        "x": 0,
+        "y": 0
+      },
+      "ok": true
+    },
+    "mouse": {
+      "target": "准备下潜   ↘",
+      "kind": "button",
+      "at": {
+        "x": 391,
+        "y": 272
+      },
+      "predictedTarget": "button.hero-deploy48",
+      "trustedEvents": {
+        "pointerdown": 2,
+        "click": 2,
+        "keydown": 2,
+        "onTarget": 1,
+        "onTargetLabel": "准备下潜   ↘",
+        "lastTarget": "button.hero-deploy48",
+        "lastClient": {
+          "x": 391,
+          "y": 272
+        }
+      },
+      "trustedClickDelivered": true,
+      "hitIntendedControl": true,
+      "gameAdvanced": false,
+      "viewBefore": {
+        "visibleButtons": 230,
+        "firstButtons": [
+          "准备下潜   ↘",
+          "出 击",
+          "养 成"
+        ],
+        "heading": "正在加载 3D 引擎…",
+        "textLength": 7262
+      },
+      "viewAfter": {
+        "visibleButtons": 230,
+        "firstButtons": [
+          "准备下潜   ↘",
+          "出 击",
+          "养 成"
+        ],
+        "heading": "正在加载 3D 引擎…",
+        "textLength": 7262
+      },
+      "gameStateBefore": null,
+      "gameStateAfter": null,
+      "ok": true,
+      "snapshot": {
+        "state": null,
+        "level": 0,
+        "modeId": null,
+        "roleId": null,
+        "hp": 0,
+        "maxHp": 0,
+        "monsterCount": 0
+      }
+    },
+    "inputApi": {
+      "pointerLockApi": "function",
+      "pointerLocked": false,
+      "hasInputModule": true,
+      "gamepadsApi": "function",
+      "fullscreenApi": "function",
+      "desktopBridge": "object"
+    }
+  },
+  "rendererConsole": [
+    {
+      "level": 2,
+      "message": "[.WebGL-0000033C0010A200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "line": 0,
+      "sourceId": "http://127.0.0.1:8123/?v=1789553543040",
+      "time": 1789553548818
+    },
+    {
+      "level": 2,
+      "message": "[.WebGL-0000033C0010A200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "line": 0,
+      "sourceId": "http://127.0.0.1:8123/?v=1789553543040",
+      "time": 1789553548979
+    },
+    {
+      "level": 2,
+      "message": "[.WebGL-0000033C0010A200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "line": 0,
+      "sourceId": "http://127.0.0.1:8123/?v=1789553543040",
+      "time": 1789553549094
+    },
+    {
+      "level": 2,
+      "message": "[.WebGL-0000033C0010A200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "line": 0,
+      "sourceId": "http://127.0.0.1:8123/?v=1789553543040",
+      "time": 1789553549303
+    }
+  ],
+  "runtimeErrorsAfterInteraction": []
+}

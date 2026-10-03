@@ -1,0 +1,81 @@
+# electron-builder 打包配置（Windows）
+# 运行方式：npm run dist（= npm run sync && electron-builder --win --x64）
+# 想换窗口图标 / 安装画面 / 输出格式，改这里即可。
+
+appId: com.chaosheng.desktop
+productName: 潮声之下
+copyright: 潮声之下 · 深渊潜航（桌面封装版）
+
+directories:
+  output: dist
+  buildResources: build
+
+# 直接用 npm 装好的 Electron 运行时，不再从网络下载 / 重新解压 zip。
+# 好处：离线可打包；避免某些环境解压 electron zip 不完整导致 exe 缺 ffmpeg.dll 等文件。
+# 升级 Electron 时只要 npm 装好 devDependency，这里不用改。
+electronDist: node_modules/electron/dist
+
+# 进 asar 的只放「壳」：主进程代码、启动画面、以及运行时依赖 ws
+# 游戏本体（含 1.4MB 的 HTML 与 assets/）走 extraResources，保持可读可替换
+files:
+  - package.json
+  - src/**/*
+  - splash/**/*
+  - node_modules/**/*
+  - '!**/*.map'
+  - '!**/test/**'
+  - '!**/*.md'
+
+asar: true
+
+# 游戏本体：打包后位于 <安装目录>/resources/game/
+# 想紧急改一个数值、换一张图，直接改这里的文件即可，不必重新打包
+extraResources:
+  - from: game
+    to: game
+    filter:
+      - '**/*'
+      - '!**/*.map'
+
+# 不要自动发布（避免 CI 上误推）
+publish: null
+
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis      # 安装版：可选安装目录、桌面快捷方式、卸载入口
+      arch: [x64]
+    - target: zip       # 免安装版：解压即用，适合放 U 盘 / 交给杀软敏感的环境
+      arch: [x64]
+  artifactName: 潮声之下_${version}_${arch}.${ext}
+  # 需要“仅当前用户安装”可保留 asInvoker；要按机器安装见下方 nsis.perMachine
+  requestedExecutionLevel: asInvoker
+  # ↓ 版本信息写进 exe：杀软判断“可疑程序”时，缺元数据的未签名 exe 最容易被拦/被删
+  legalTrademarks: 潮声之下
+  # （CompanyName 取 package.json 的 companyName，FileDescription 取 description，
+  #   LegalCopyright 取顶层 copyright，均会在打包时写入 exe 属性）
+
+nsis:
+  oneClick: false                     # 出向导，让用户选安装位置
+  perMachine: false                   # 默认装到当前用户，免管理员权限
+  allowElevation: false               # 关掉提权
+  packElevateHelper: false            # 且不打包 resources/elevate.exe（提权小工具是杀软误报重灾区；perMachine=false 时不需要）
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: 潮声之下
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  deleteAppDataOnUninstall: false     # 卸载保留存档（%APPDATA%\潮声之下）
+  language: '2052'                    # 简体中文安装向导
+  artifactName: 潮声之下_安装包_${version}.${ext}
+
+# 免安装版命名
+portable:
+  artifactName: 潮声之下_绿色版_${version}.${ext}
+
+# 若 npm / Electron 下载缓慢，可在打包前设置国内镜像：
+#   set ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/
+#   set ELECTRON_BUILDER_BINARIES_MIRROR=https://npmmirror.com/mirrors/electron-builder-binaries/
+# （PowerShell 用 $env:ELECTRON_MIRROR="..."）

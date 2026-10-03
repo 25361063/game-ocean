@@ -1,0 +1,16 @@
+{
+  "name": "chaosheng-mobile",
+  "productName": "潮声之下 手机版",
+  "version": "1.0.0",
+  "description": "潮声之下 · 深渊潜航 Android 版（WebView + 内置本地服务器，无 Gradle 可构建）",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "fetch-toolchain": "node scripts/fetch-toolchain.mjs",
+    "icons": "python scripts/make-icons.py",
+    "sync": "node scripts/sync-mobile.mjs",
+    "check:layout": "node scripts/check-layout.mjs",
+    "build:apk": "npm run sync && node scripts/build-apk.mjs",
+    "apk": "node scripts/build-apk.mjs"
+  }
+}

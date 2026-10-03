@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<title>连接主机</title>
+<style>
+  :root{--bg:#04070c;--panel:#0a131b;--ink:#cfe9df;--dim:#5e736c;--acc:#5fe0b0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","Songti SC",system-ui,sans-serif;
+    display:flex;flex-direction:column;justify-content:center;gap:12px;padding:22px 24px;user-select:none;}
+  h1{font-size:15px;font-weight:600;letter-spacing:.08em;}
+  p{font-size:12px;line-height:1.7;color:var(--dim);}
+  input{width:100%;padding:9px 11px;border-radius:7px;border:1px solid #1c303b;background:#060d14;color:var(--ink);
+    font-size:14px;font-family:Consolas,ui-monospace,monospace;outline:none;}
+  input:focus{border-color:var(--acc);box-shadow:0 0 0 2px rgba(95,224,176,.15);}
+  .row{display:flex;gap:10px;justify-content:flex-end;margin-top:4px;}
+  button{padding:8px 16px;border-radius:7px;border:1px solid #1c303b;background:#0d1a22;color:var(--ink);
+    font-size:13px;cursor:pointer;}
+  button.primary{background:var(--acc);border-color:var(--acc);color:#04110c;font-weight:600;}
+  button:hover{filter:brightness(1.12);}
+  #err{color:#e0506a;font-size:12px;min-height:16px;}
+</style>
+</head>
+<body>
+  <h1>作为客机连接主机</h1>
+  <p>填写主机窗口里显示的地址（默认 8123 端口）。回车确认。</p>
+  <input id="addr" type="text" spellcheck="false" placeholder="例如 192.168.1.20:8123" autofocus>
+  <div id="err"></div>
+  <div class="row">
+    <button id="cancel">取消</button>
+    <button id="ok" class="primary">连接</button>
+  </div>
+<script>
+  const input = document.getElementById('addr');
+  const err = document.getElementById('err');
+  const initial = new URLSearchParams(location.search).get('initial') || '';
+  if (initial) input.value = initial;
+
+  function submit(){
+    const raw = input.value.trim();
+    if (!raw) { err.textContent = '请输入主机地址'; return; }
+    if (!/^[A-Za-z0-9._-]+(:\d{1,5})?$/.test(raw)) { err.textContent = '格式应为 IP 或 主机名[:端口]'; return; }
+    window.desktopApp.submitPrompt(raw);
+  }
+  document.getElementById('ok').addEventListener('click', submit);
+  document.getElementById('cancel').addEventListener('click', () => window.desktopApp.cancelPrompt());
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submit();
+    if (e.key === 'Escape') window.desktopApp.cancelPrompt();
+  });
+  window.addEventListener('DOMContentLoaded', () => input.focus());
+</script>
+</body>
+</html>

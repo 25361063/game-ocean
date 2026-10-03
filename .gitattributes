@@ -1,0 +1,28 @@
+* text=auto eol=lf
+
+# 图片 / 二进制
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.gif  binary
+*.ico  binary
+*.zip  binary
+*.glb  binary
+*.epub binary
+
+# 文本
+*.html text
+*.md   text
+*.js   text
+*.cjs  text
+*.py   text
+
+# Windows 脚本必须保留 CRLF
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# 大体积资源（用于 GitHub 语言统计时忽略）
+games/chaosheng-zhixia/assets/vitruvian/packed49.js linguist-vendored
+games/**/assets/**/*.png linguist-vendored

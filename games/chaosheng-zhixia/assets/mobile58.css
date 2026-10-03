@@ -1,0 +1,10 @@
+/* Three skills on an 88px quarter-circle around the fire button. */
+html.is-touch #btnPulse{right:calc(24px + env(safe-area-inset-right))!important;bottom:calc(92px + env(safe-area-inset-bottom))!important}
+html.is-touch #btnWeapon{right:calc(124px + env(safe-area-inset-right))!important;bottom:calc(104px + env(safe-area-inset-bottom))!important;border-radius:50%}
+html.is-touch #btnOverdrive{right:calc(98px + env(safe-area-inset-right))!important;bottom:calc(166px + env(safe-area-inset-bottom))!important;border-radius:50%}
+html.is-touch #btnShield{right:calc(36px + env(safe-area-inset-right))!important;bottom:calc(192px + env(safe-area-inset-bottom))!important;border-radius:50%}
+html.is-touch #btnDash,html.is-touch #btnJump{bottom:calc(20px + env(safe-area-inset-bottom))!important;width:44px!important;height:44px!important;min-width:44px;border-radius:50%;background-size:52% 52%!important}
+html.is-touch #btnDash{right:calc(24px + env(safe-area-inset-right))!important}
+html.is-touch #btnJump{right:calc(84px + env(safe-area-inset-right))!important}
+html.is-touch #btnAim57{right:calc(190px + env(safe-area-inset-right));bottom:calc(104px + env(safe-area-inset-bottom))}
+html.is-touch #btnPickup{right:calc(144px + env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom))!important;width:84px!important}

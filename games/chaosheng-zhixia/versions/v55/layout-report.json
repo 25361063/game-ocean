@@ -1,0 +1,1406 @@
+{
+  "generatedAt": "2026-09-16T13:02:15.117Z",
+  "staticIssues": [],
+  "devices": [
+    {
+      "device": {
+        "name": "16:9 老机型",
+        "width": 640,
+        "height": 360,
+        "note": "720×1280 / dpr2"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 641,
+        "h": 361
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 587,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 631,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 565,
+            "y": 285,
+            "w": 64,
+            "h": 64,
+            "right": 629,
+            "bottom": 349,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 443,
+            "y": 241,
+            "w": 48,
+            "h": 48,
+            "right": 491,
+            "bottom": 289,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 509,
+            "y": 229,
+            "w": 52,
+            "h": 52,
+            "right": 561,
+            "bottom": 281,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 443,
+            "y": 301,
+            "w": 48,
+            "h": 48,
+            "right": 491,
+            "bottom": 349,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 445,
+            "y": 171,
+            "w": 50,
+            "h": 50,
+            "right": 495,
+            "bottom": 221,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 585,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 631,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 585,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 631,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 533,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 579,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 533,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 579,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 277,
+            "y": 305,
+            "w": 88,
+            "h": 44,
+            "right": 365,
+            "bottom": 349,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 641,
+            "h": 361,
+            "right": 641,
+            "bottom": 361,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 80,
+            "w": 321,
+            "h": 282,
+            "right": 321,
+            "bottom": 361,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-640x360.png"
+    },
+    {
+      "device": {
+        "name": "16:9 主流",
+        "width": 854,
+        "height": 480,
+        "note": "1920×1080 / dpr2.25"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 854,
+        "h": 480
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 800,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 844,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 778,
+            "y": 404,
+            "w": 64,
+            "h": 64,
+            "right": 842,
+            "bottom": 468,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 656,
+            "y": 360,
+            "w": 48,
+            "h": 48,
+            "right": 704,
+            "bottom": 408,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 722,
+            "y": 348,
+            "w": 52,
+            "h": 52,
+            "right": 774,
+            "bottom": 400,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 656,
+            "y": 420,
+            "w": 48,
+            "h": 48,
+            "right": 704,
+            "bottom": 468,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 658,
+            "y": 290,
+            "w": 50,
+            "h": 50,
+            "right": 708,
+            "bottom": 340,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 798,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 844,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 798,
+            "y": 152,
+            "w": 46,
+            "h": 46,
+            "right": 844,
+            "bottom": 198,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 798,
+            "y": 200,
+            "w": 46,
+            "h": 46,
+            "right": 844,
+            "bottom": 246,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 798,
+            "y": 248,
+            "w": 46,
+            "h": 46,
+            "right": 844,
+            "bottom": 294,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 383,
+            "y": 424,
+            "w": 88,
+            "h": 44,
+            "right": 471,
+            "bottom": 468,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 854,
+            "h": 480,
+            "right": 854,
+            "bottom": 480,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 106,
+            "w": 427,
+            "h": 374,
+            "right": 427,
+            "bottom": 480,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-854x480.png"
+    },
+    {
+      "device": {
+        "name": "18:9",
+        "width": 810,
+        "height": 405,
+        "note": "1440×2880 / dpr1.78"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 810,
+        "h": 406
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 756,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 800,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 734,
+            "y": 330,
+            "w": 64,
+            "h": 64,
+            "right": 798,
+            "bottom": 394,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 612,
+            "y": 286,
+            "w": 48,
+            "h": 48,
+            "right": 660,
+            "bottom": 334,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 678,
+            "y": 274,
+            "w": 52,
+            "h": 52,
+            "right": 730,
+            "bottom": 326,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 612,
+            "y": 346,
+            "w": 48,
+            "h": 48,
+            "right": 660,
+            "bottom": 394,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 614,
+            "y": 216,
+            "w": 50,
+            "h": 50,
+            "right": 664,
+            "bottom": 266,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 754,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 800,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 754,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 800,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 702,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 748,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 702,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 748,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 361,
+            "y": 350,
+            "w": 88,
+            "h": 44,
+            "right": 449,
+            "bottom": 394,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 810,
+            "h": 406,
+            "right": 810,
+            "bottom": 406,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 89,
+            "w": 405,
+            "h": 317,
+            "right": 405,
+            "bottom": 406,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-810x405.png"
+    },
+    {
+      "device": {
+        "name": "19.5:9 长屏",
+        "width": 832,
+        "height": 384,
+        "note": "1080×2340 / dpr2.81"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 832,
+        "h": 384
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 778,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 822,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 756,
+            "y": 308,
+            "w": 64,
+            "h": 64,
+            "right": 820,
+            "bottom": 372,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 634,
+            "y": 264,
+            "w": 48,
+            "h": 48,
+            "right": 682,
+            "bottom": 312,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 700,
+            "y": 252,
+            "w": 52,
+            "h": 52,
+            "right": 752,
+            "bottom": 304,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 634,
+            "y": 324,
+            "w": 48,
+            "h": 48,
+            "right": 682,
+            "bottom": 372,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 636,
+            "y": 194,
+            "w": 50,
+            "h": 50,
+            "right": 686,
+            "bottom": 244,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 776,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 822,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 776,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 822,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 724,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 770,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 724,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 770,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 372,
+            "y": 328,
+            "w": 88,
+            "h": 44,
+            "right": 460,
+            "bottom": 372,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 832,
+            "h": 384,
+            "right": 832,
+            "bottom": 384,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 84,
+            "w": 416,
+            "h": 300,
+            "right": 416,
+            "bottom": 384,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-832x384.png"
+    },
+    {
+      "device": {
+        "name": "20:9 长屏",
+        "width": 873,
+        "height": 393,
+        "note": "1080×2400 / dpr2.75"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 874,
+        "h": 394
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 820,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 864,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 798,
+            "y": 318,
+            "w": 64,
+            "h": 64,
+            "right": 862,
+            "bottom": 382,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 676,
+            "y": 274,
+            "w": 48,
+            "h": 48,
+            "right": 724,
+            "bottom": 322,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 742,
+            "y": 262,
+            "w": 52,
+            "h": 52,
+            "right": 794,
+            "bottom": 314,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 676,
+            "y": 334,
+            "w": 48,
+            "h": 48,
+            "right": 724,
+            "bottom": 382,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 678,
+            "y": 204,
+            "w": 50,
+            "h": 50,
+            "right": 728,
+            "bottom": 254,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 818,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 864,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 818,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 864,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 766,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 812,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 766,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 812,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 393,
+            "y": 338,
+            "w": 88,
+            "h": 44,
+            "right": 481,
+            "bottom": 382,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 874,
+            "h": 394,
+            "right": 874,
+            "bottom": 394,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 87,
+            "w": 437,
+            "h": 307,
+            "right": 437,
+            "bottom": 394,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-873x393.png"
+    },
+    {
+      "device": {
+        "name": "21:9 超长",
+        "width": 914,
+        "height": 411,
+        "note": "1080×2520 / dpr2.6"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 914,
+        "h": 412
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 860,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 904,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 838,
+            "y": 336,
+            "w": 64,
+            "h": 64,
+            "right": 902,
+            "bottom": 400,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 716,
+            "y": 292,
+            "w": 48,
+            "h": 48,
+            "right": 764,
+            "bottom": 340,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 782,
+            "y": 280,
+            "w": 52,
+            "h": 52,
+            "right": 834,
+            "bottom": 332,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 716,
+            "y": 352,
+            "w": 48,
+            "h": 48,
+            "right": 764,
+            "bottom": 400,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 718,
+            "y": 222,
+            "w": 50,
+            "h": 50,
+            "right": 768,
+            "bottom": 272,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 858,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 904,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 858,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 904,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 806,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 852,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 806,
+            "y": 154,
+            "w": 46,
+            "h": 46,
+            "right": 852,
+            "bottom": 200,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 413,
+            "y": 356,
+            "w": 88,
+            "h": 44,
+            "right": 501,
+            "bottom": 400,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 914,
+            "h": 412,
+            "right": 914,
+            "bottom": 412,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 91,
+            "w": 457,
+            "h": 321,
+            "right": 457,
+            "bottom": 412,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-914x411.png"
+    },
+    {
+      "device": {
+        "name": "平板",
+        "width": 1280,
+        "height": 800,
+        "note": "1600×2560 / dpr2"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 1280,
+        "h": 800
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 1226,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 1270,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 1204,
+            "y": 724,
+            "w": 64,
+            "h": 64,
+            "right": 1268,
+            "bottom": 788,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 1082,
+            "y": 680,
+            "w": 48,
+            "h": 48,
+            "right": 1130,
+            "bottom": 728,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 1148,
+            "y": 668,
+            "w": 52,
+            "h": 52,
+            "right": 1200,
+            "bottom": 720,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 1082,
+            "y": 740,
+            "w": 48,
+            "h": 48,
+            "right": 1130,
+            "bottom": 788,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 1084,
+            "y": 610,
+            "w": 50,
+            "h": 50,
+            "right": 1134,
+            "bottom": 660,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 1224,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 1270,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 1224,
+            "y": 152,
+            "w": 46,
+            "h": 46,
+            "right": 1270,
+            "bottom": 198,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 1224,
+            "y": 200,
+            "w": 46,
+            "h": 46,
+            "right": 1270,
+            "bottom": 246,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 1224,
+            "y": 248,
+            "w": 46,
+            "h": 46,
+            "right": 1270,
+            "bottom": 294,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 596,
+            "y": 744,
+            "w": 88,
+            "h": 44,
+            "right": 684,
+            "bottom": 788,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 1280,
+            "h": 800,
+            "right": 1280,
+            "bottom": 800,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 176,
+            "w": 640,
+            "h": 624,
+            "right": 640,
+            "bottom": 800,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-1280x800.png"
+    },
+    {
+      "device": {
+        "name": "窄高（竖屏误锁）",
+        "width": 640,
+        "height": 900,
+        "note": "异常方向，仅看是否崩坏"
+      },
+      "issues": [],
+      "viewport": {
+        "w": 640,
+        "h": 900
+      },
+      "dpr": 1.5,
+      "groups": {
+        "buttons": [
+          {
+            "id": "btnPause",
+            "label": "暂停",
+            "x": 586,
+            "y": 10,
+            "w": 44,
+            "h": 44,
+            "right": 630,
+            "bottom": 54,
+            "visible": true
+          },
+          {
+            "id": "btnPulse",
+            "label": "普攻",
+            "x": 564,
+            "y": 824,
+            "w": 64,
+            "h": 64,
+            "right": 628,
+            "bottom": 888,
+            "visible": true
+          },
+          {
+            "id": "btnWeapon",
+            "label": "切换武器",
+            "x": 442,
+            "y": 780,
+            "w": 48,
+            "h": 48,
+            "right": 490,
+            "bottom": 828,
+            "visible": true
+          },
+          {
+            "id": "btnJump",
+            "label": "跳跃",
+            "x": 508,
+            "y": 768,
+            "w": 52,
+            "h": 52,
+            "right": 560,
+            "bottom": 820,
+            "visible": true
+          },
+          {
+            "id": "btnSink",
+            "label": "下潜",
+            "x": 442,
+            "y": 840,
+            "w": 48,
+            "h": 48,
+            "right": 490,
+            "bottom": 888,
+            "visible": true
+          },
+          {
+            "id": "btnDash",
+            "label": "闪避冲刺",
+            "x": 444,
+            "y": 710,
+            "w": 50,
+            "h": 50,
+            "right": 494,
+            "bottom": 760,
+            "visible": true
+          },
+          {
+            "id": "btnShield",
+            "label": "髓瓷护幕",
+            "x": 584,
+            "y": 104,
+            "w": 46,
+            "h": 46,
+            "right": 630,
+            "bottom": 150,
+            "visible": true
+          },
+          {
+            "id": "btnOverdrive",
+            "label": "神经超频",
+            "x": 584,
+            "y": 152,
+            "w": 46,
+            "h": 46,
+            "right": 630,
+            "bottom": 198,
+            "visible": true
+          },
+          {
+            "id": "btnCam",
+            "label": "切换视角",
+            "x": 584,
+            "y": 200,
+            "w": 46,
+            "h": 46,
+            "right": 630,
+            "bottom": 246,
+            "visible": true
+          },
+          {
+            "id": "btnShop",
+            "label": "装备库",
+            "x": 584,
+            "y": 248,
+            "w": 46,
+            "h": 46,
+            "right": 630,
+            "bottom": 294,
+            "visible": true
+          },
+          {
+            "id": "btnPickup",
+            "label": "拾取",
+            "x": 276,
+            "y": 844,
+            "w": 88,
+            "h": 44,
+            "right": 364,
+            "bottom": 888,
+            "visible": true
+          }
+        ],
+        "touchUI": [
+          {
+            "id": "touchUI",
+            "label": "暂停\n  \n  ",
+            "x": 0,
+            "y": 0,
+            "w": 640,
+            "h": 900,
+            "right": 640,
+            "bottom": 900,
+            "visible": true
+          }
+        ],
+        "joyZone": [
+          {
+            "id": "joyZone",
+            "label": "",
+            "x": 0,
+            "y": 198,
+            "w": 320,
+            "h": 702,
+            "right": 320,
+            "bottom": 900,
+            "visible": true
+          }
+        ],
+        "joyBase": [],
+        "skillBar": [],
+        "weaponSlots": [],
+        "minimap": [],
+        "minimapWrap": [],
+        "hudTop": []
+      },
+      "isTouch": true,
+      "hudRect": null,
+      "minimapRect": null,
+      "screenshot": "layout-check\\layout-640x900.png"
+    }
+  ]
+}

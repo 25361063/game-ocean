@@ -1,0 +1,33 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync('潮声之下_深渊潜航3D_v22.html','utf8');
+const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
+const ctx=vm.createContext({console,lowQ:false});
+vm.runInContext(scripts.find(s=>s.includes('THREE={}')&&s.length>100000),ctx);
+const src=html.slice(html.indexOf('function buildCaptainModel(role)'),html.indexOf('function rebuildPlayerModel'));
+ctx.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){},fillText(){}})})};
+vm.runInContext(src,ctx);
+for(const quality of [true,false])for(const role of ['explorer','guardian','hunter']){
+  ctx.lowQ=quality;ctx.role=role;
+  vm.runInContext('model=buildCaptainModel(role);model.updateMatrixWorld(true);box=new THREE.Box3().setFromObject(model);',ctx);
+  assert.ok(ctx.box.max.y>1.5&&ctx.box.max.y<2);
+  assert.ok(ctx.box.min.y>-.3);
+  let meshes=0,triangles=0;ctx.model.traverse(o=>{if(o.isMesh){meshes++;const g=o.geometry;triangles+=(g.index?g.index.count:g.attributes.position.count)/3;}});
+  assert.ok(meshes<120);assert.ok(triangles<25000);
+  console.log(role,quality?'low':'high',meshes+' meshes',triangles+' triangles');
+}
+vm.runInContext(`scene=new THREE.Scene();camera=new THREE.PerspectiveCamera();G={state:'PLAYING'};
+ S={MENU:'MENU'};netConnected=true;netScope=()=> 'same';
+ remotePlayer={x:0,y:1.6,z:0,yaw:0,hp:100,maxHp:200,role:'explorer',scope:'same',playing:true,seen:Date.now()};
+ updateRemoteCaptain(.016);`,ctx);
+assert.equal(ctx.remotePlayer.mesh.position.y,0);
+assert.equal(ctx.remotePlayer.mesh.rotation.y,Math.PI);
+assert.equal(ctx.remotePlayer.mesh.userData.badge.fill.scale.x,.5);
+ctx.remotePlayer.x=1;vm.runInContext('updateRemoteCaptain(.016)',ctx);
+assert.ok(ctx.remotePlayer.mesh.position.x>0&&ctx.remotePlayer.mesh.position.x<1);
+ctx.remotePlayer.playing=false;vm.runInContext('updateRemoteCaptain(.016)',ctx);
+assert.equal(ctx.remotePlayer.mesh.visible,true);
+ctx.remotePlayer.x=30;vm.runInContext('updateRemoteCaptain(.016)',ctx);
+assert.equal(ctx.remotePlayer.mesh.position.x,30);
+ctx.remotePlayer.scope='other';vm.runInContext('updateRemoteCaptain(.016)',ctx);
+assert.equal(ctx.remotePlayer.mesh.visible,false);
+console.log('PASS: model bounds/budget, foot height, facing, health ratio, interpolation, pause visibility, teleport snap, stage isolation');

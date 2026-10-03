@@ -1,0 +1,16 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync('潮声之下_深渊潜航3D_v22.html','utf8');
+for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))new vm.Script(m[1]);
+const c=vm.createContext({G:{},MONSTER_TYPES:{gray:{speed:2}},speedMult:()=>1,resolveCollision:(x,z)=>[x,z],faceToward:()=>{}});
+vm.runInContext(html.slice(html.indexOf('function squadBusy47'),html.indexOf('function tickMonsters(')),c);
+c.ms=['shield','gray','gray','spitter','sniper','dart','swarm'].map((type,i)=>({type,hp:5,x:(i-3)*2,z:22}));
+vm.runInContext('planSquad47(ms,0,0,.1)',c);
+assert.equal(c.ms[0].squad47.role,'front');assert.equal(c.ms[3].squad47.role,'back');assert.equal(c.ms[5].squad47.role,'flank');
+assert.ok(c.ms[4].squad47.z>c.ms[0].squad47.z+10);assert.ok(c.ms[5].squad47.x*c.ms[6].squad47.x<0);
+vm.runInContext('for(let i=0;i<600;i++){const p=planSquad47(ms,0,0,.05);steerSquad47(ms,p,0,0,.05)}',c);
+assert.ok(Math.hypot(c.ms[3].x-c.ms[3].squad47.x,c.ms[3].z-c.ms[3].squad47.z)<.5);
+c.ms[3].atk={phase:'windup'};const x=c.ms[3].x,z=c.ms[3].z;
+vm.runInContext('steerSquad47(ms,planSquad47(ms,8,0,.1),8,0,.1)',c);assert.equal(c.ms[3].x,x);assert.equal(c.ms[3].z,z);
+c.ms[0].hp=0;vm.runInContext('planSquad47(ms,0,0,.1)',c);assert.equal(c.ms[1].squad47.role,'front');
+vm.runInContext('planSquad47([ms[1]],0,0,.1)',c);assert.equal(c.ms[1].squad47,null);
+console.log('PASS: role slots, flanks, backline convergence, attack lock, casualties and solo fallback');

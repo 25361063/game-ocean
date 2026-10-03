@@ -1,0 +1,29 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>潜航员 · 模型预览</title>
+<style>body{margin:0;background:#08161f;color:#ddf6ee;font:16px system-ui}header{position:absolute;left:5%;top:5%;pointer-events:none}h1{font-size:26px}p{color:#92b3b5}footer{position:absolute;bottom:5%;width:100%;display:flex;justify-content:space-evenly;color:#a7efdb;pointer-events:none}canvas{display:block}#error{color:#ff8c98}</style>
+<header><h1>深潜装具 · 船长小队</h1><p>浣生 / 迈尔辛 / 帕米尔 · 缓慢旋转展示</p><p id="error"></p></header>
+<footer><span>调查 · 扫描腕环</span><span>工程 · 裂甲重锤</span><span>突击 · 榴弹发射器</span></footer>
+<script>
+(async()=>{
+  const html=await (await fetch('/')).text();
+  const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
+  const library=scripts.find(s=>s.includes('THREE={}')&&s.length>100000);
+  if(!library)throw Error('未找到内置渲染引擎');
+  const script=document.createElement('script');script.textContent=library;document.head.appendChild(script);
+  const source=html.slice(html.indexOf('function buildCaptainModel(role)'),html.indexOf('function buildTeammateBadge'));
+  const factory=new Function('THREE','lowQ',source+';return buildCaptainModel;')(THREE,false);
+  const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.8;document.body.appendChild(renderer.domElement);
+  const scene=new THREE.Scene();scene.background=new THREE.Color(0x08161f);
+  const camera=new THREE.PerspectiveCamera(35,innerWidth/innerHeight,.1,100);
+  function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.position.set(0,2.6,Math.max(7,6/camera.aspect));camera.lookAt(0,.85,0);camera.updateProjectionMatrix();}
+  resize();addEventListener('resize',resize);
+  scene.add(new THREE.HemisphereLight(0xc9eaff,0x19382c,.7));
+  const key=new THREE.DirectionalLight(0xffffff,1.3);key.position.set(2,4,4);scene.add(key);
+  const rim=new THREE.DirectionalLight(0x52bbdf,.8);rim.position.set(-3,3,-2);scene.add(rim);
+  const models=['explorer','guardian','hunter'].map((r,i)=>{const m=factory(r);m.position.x=(i-1)*1.8;scene.add(m);return m;});
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(30,30),new THREE.MeshBasicMaterial({color:0x102832}));floor.rotation.x=-Math.PI/2;floor.position.y=-.12;scene.add(floor);
+  const started=performance.now();
+  function frame(t){for(const m of models)m.rotation.y=Math.sin((t-started)*.00022)*1.4;renderer.render(scene,camera);requestAnimationFrame(frame);}requestAnimationFrame(frame);
+})().catch(e=>document.querySelector('#error').textContent=e.message);
+</script></html>
